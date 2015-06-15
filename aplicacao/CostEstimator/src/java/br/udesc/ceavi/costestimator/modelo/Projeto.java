@@ -1,5 +1,7 @@
 package br.udesc.ceavi.costestimator.modelo;
 
+import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
+import br.udesc.ceavi.costestimator.dao.projeto.ProjetoDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,6 +68,26 @@ public class Projeto implements Serializable {
     @OneToMany(mappedBy = "projeto")
     private List<Custo> custos;
 
+    public void salvar(){
+        ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
+        dao.salvar(this);
+    }
+    
+    public static void remover(int id){
+        ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
+        dao.remover(id);
+    }
+    
+    public static List<Projeto> listar(){
+        ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
+        return dao.listar();
+    }
+    
+    public static Projeto buscar(int id){
+        ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
+        return dao.buscar(id);
+    }
+    
     public Projeto(){
         this.funcionarios = new ArrayList<>();
         this.atores = new ArrayList<>();

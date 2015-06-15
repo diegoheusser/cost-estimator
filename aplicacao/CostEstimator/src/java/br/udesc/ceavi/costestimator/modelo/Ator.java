@@ -1,6 +1,9 @@
 package br.udesc.ceavi.costestimator.modelo;
 
+import br.udesc.ceavi.costestimator.dao.ator.AtorDAO;
+import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,6 +36,26 @@ public class Ator implements Serializable {
     @ManyToOne
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
+    
+    public void salvar(){
+        AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
+        dao.salvar(this);
+    }
+    
+    public static void remover(int id){
+        AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
+        dao.remover(id);
+    }
+    
+    public static List<Ator> listar(){
+        AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
+        return dao.listar();
+    }
+    
+    public static Ator buscar(int id){
+        AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
+        return dao.buscar(id);
+    }
 
     public int getId() {
         return id;

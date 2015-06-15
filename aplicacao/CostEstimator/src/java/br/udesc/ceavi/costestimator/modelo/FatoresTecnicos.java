@@ -1,6 +1,9 @@
 package br.udesc.ceavi.costestimator.modelo;
 
+import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
+import br.udesc.ceavi.costestimator.dao.fatorestecnicos.FatoresTecnicosDAO;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -66,6 +69,26 @@ public class FatoresTecnicos implements Serializable {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
+    public void salvar(){
+        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
+        dao.salvar(this);
+    }
+    
+    public static void remover(int id){
+        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
+        dao.remover(id);
+    }
+    
+    public static List<FatoresTecnicos> listar(){
+        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
+        return dao.listar();
+    }
+    
+    public static FatoresTecnicos buscar(int id){
+        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
+        return dao.buscar(id);
+    }
+    
     public int getId() {
         return id;
     }

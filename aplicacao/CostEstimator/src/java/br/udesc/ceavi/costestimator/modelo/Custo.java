@@ -1,6 +1,9 @@
 package br.udesc.ceavi.costestimator.modelo;
 
+import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
+import br.udesc.ceavi.costestimator.dao.custo.CustoDAO;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +34,26 @@ public class Custo implements Serializable {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
+    public void salvar(){
+        CustoDAO dao = DAOFactory.getDAOFactory().getCustoDAO();
+        dao.salvar(this);
+    }
+    
+    public static void remover(int id){
+        CustoDAO dao = DAOFactory.getDAOFactory().getCustoDAO();
+        dao.remover(id);
+    }
+    
+    public static List<Custo> listar(){
+        CustoDAO dao = DAOFactory.getDAOFactory().getCustoDAO();
+        return dao.listar();
+    }
+    
+    public static Custo buscar(int id){
+        CustoDAO dao = DAOFactory.getDAOFactory().getCustoDAO();
+        return dao.buscar(id);
+    }
+    
     public int getId() {
         return id;
     }

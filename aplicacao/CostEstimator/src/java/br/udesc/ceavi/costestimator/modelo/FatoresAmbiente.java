@@ -1,6 +1,9 @@
 package br.udesc.ceavi.costestimator.modelo;
 
+import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
+import br.udesc.ceavi.costestimator.dao.fatoresambiente.FatoresAmbienteDAO;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,6 +54,26 @@ public class FatoresAmbiente implements Serializable {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
+    public void salvar(){
+        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
+        dao.salvar(this);
+    }
+    
+    public static void remover(int id){
+        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
+        dao.remover(id);
+    }
+    
+    public static List<FatoresAmbiente> listar(){
+        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
+        return dao.listar();
+    }
+    
+    public static FatoresAmbiente buscar(int id){
+        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
+        return dao.buscar(id);
+    }
+    
     public int getId() {
         return id;
     }

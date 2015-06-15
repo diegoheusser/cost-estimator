@@ -1,13 +1,21 @@
 package br.udesc.ceavi.costestimator.dao.jpa;
 
 import br.udesc.ceavi.costestimator.dao.ator.AtorDAO;
+import br.udesc.ceavi.costestimator.dao.ator.JPAAtorDAO;
 import br.udesc.ceavi.costestimator.dao.casodeuso.CasoDeUsoDAO;
+import br.udesc.ceavi.costestimator.dao.casodeuso.JPACasoDeUsoDAO;
 import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
 import br.udesc.ceavi.costestimator.dao.custo.CustoDAO;
+import br.udesc.ceavi.costestimator.dao.custo.JPACustoDAO;
 import br.udesc.ceavi.costestimator.dao.fatoresambiente.FatoresAmbienteDAO;
+import br.udesc.ceavi.costestimator.dao.fatoresambiente.JPAFatoresAmbienteDAO;
 import br.udesc.ceavi.costestimator.dao.fatorestecnicos.FatoresTecnicosDAO;
+import br.udesc.ceavi.costestimator.dao.fatorestecnicos.JPAFatoresTecnicosDAO;
 import br.udesc.ceavi.costestimator.dao.funcionario.FuncionarioDAO;
+import br.udesc.ceavi.costestimator.dao.funcionario.JPAFuncionarioDAO;
+import br.udesc.ceavi.costestimator.dao.projeto.JPAProjetoDAO;
 import br.udesc.ceavi.costestimator.dao.projeto.ProjetoDAO;
+import br.udesc.ceavi.costestimator.dao.usuario.JPAUsuarioDAO;
 import br.udesc.ceavi.costestimator.dao.usuario.UsuarioDAO;
 
 /**
@@ -18,42 +26,42 @@ public class JPADAOFactory extends DAOFactory {
 
     @Override
     public AtorDAO getAtorDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPAAtorDAO();
     }
 
     @Override
     public CasoDeUsoDAO getCasoDeUsoDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPACasoDeUsoDAO();
     }
 
     @Override
     public CustoDAO getCustoDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPACustoDAO();
     }
 
     @Override
     public FatoresAmbienteDAO getFatoresAmbienteDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPAFatoresAmbienteDAO();
     }
 
     @Override
     public FatoresTecnicosDAO getFatoresTecnicosDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPAFatoresTecnicosDAO();
     }
 
     @Override
     public FuncionarioDAO getFuncionarioDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPAFuncionarioDAO();
     }
 
     @Override
     public ProjetoDAO getProjetoDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPAProjetoDAO();
     }
 
     @Override
     public UsuarioDAO getUsuarioDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JPAUsuarioDAO();
     }
     
 }

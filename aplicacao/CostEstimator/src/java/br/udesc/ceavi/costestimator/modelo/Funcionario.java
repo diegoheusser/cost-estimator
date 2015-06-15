@@ -1,5 +1,7 @@
 package br.udesc.ceavi.costestimator.modelo;
 
+import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
+import br.udesc.ceavi.costestimator.dao.funcionario.FuncionarioDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,26 @@ public class Funcionario implements Serializable {
     
     @ManyToMany(mappedBy = "funcionarios")
     private List<Projeto> projetos;
+    
+    public void salvar(){
+        FuncionarioDAO dao = DAOFactory.getDAOFactory().getFuncionarioDAO();
+        dao.salvar(this);
+    }
+    
+    public static void remover(int id){
+        FuncionarioDAO dao = DAOFactory.getDAOFactory().getFuncionarioDAO();
+        dao.remover(id);
+    }
+    
+    public static List<Funcionario> listar(){
+        FuncionarioDAO dao = DAOFactory.getDAOFactory().getFuncionarioDAO();
+        return dao.listar();
+    }
+    
+    public static Funcionario buscar(int id){
+        FuncionarioDAO dao = DAOFactory.getDAOFactory().getFuncionarioDAO();
+        return dao.buscar(id);
+    }
     
     public Funcionario(){
         this.projetos = new ArrayList<>();
