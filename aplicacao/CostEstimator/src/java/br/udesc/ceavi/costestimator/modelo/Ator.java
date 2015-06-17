@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author diego
+ * @author diego, marcos
  */
 @Entity
 public class Ator implements Serializable {
