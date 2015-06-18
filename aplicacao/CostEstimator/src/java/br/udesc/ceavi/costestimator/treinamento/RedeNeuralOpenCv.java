@@ -28,10 +28,11 @@ public class RedeNeuralOpenCv implements IRedeNeural {
         this.saidasRede = 3;
         this.pesoInicial = 0.8;
         //Configuração da rede neural 
-        this.camadas = new Mat(3, 1, CvType.CV_32SC1);//Rede com a definição de 3 camadas
+        this.camadas = new Mat(4, 1, CvType.CV_32SC1);//Rede com a definição de 3 camadas
         this.camadas.put(0, 0, entradasRede);//Camada de entrada
         this.camadas.put(1, 0, 15);//Camada oculta
-        this.camadas.put(2, 0, saidasRede);//Camada de saída
+        this.camadas.put(2, 0, 100);
+        this.camadas.put(3, 0, saidasRede);//Camada de saída
         this.mlp = new CvANN_MLP(this.camadas, CvANN_MLP.SIGMOID_SYM, 1, 1);
     }
 
