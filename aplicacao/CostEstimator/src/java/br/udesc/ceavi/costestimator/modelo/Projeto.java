@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -59,11 +60,11 @@ public class Projeto implements Serializable {
     @OneToMany(mappedBy = "projeto")
     private List<CasoDeUso> casoDeUsos;
     
-    @OneToMany(mappedBy = "projeto")
-    private List<FatoresAmbiente> fatoresAmbientais;
+    @OneToOne(mappedBy = "projeto")
+    private FatoresAmbiente fatoresAmbientais;
     
-    @OneToMany(mappedBy = "projeto")
-    private List<FatoresTecnicos> fatoresTecnicos;
+    @OneToOne(mappedBy = "projeto")
+    private FatoresTecnicos fatoresTecnicos;
     
     @OneToMany(mappedBy = "projeto")
     private List<Custo> custos;
@@ -92,8 +93,6 @@ public class Projeto implements Serializable {
         this.funcionarios = new ArrayList<>();
         this.atores = new ArrayList<>();
         this.casoDeUsos = new ArrayList<>();
-        this.fatoresAmbientais = new ArrayList<>();
-        this.fatoresTecnicos = new ArrayList<>();
         this.custos = new ArrayList<>();
     }
     
@@ -161,19 +160,19 @@ public class Projeto implements Serializable {
         this.casoDeUsos = casoDeUsos;
     }
 
-    public List<FatoresAmbiente> getFatoresAmbientais() {
+    public FatoresAmbiente getFatoresAmbientais() {
         return fatoresAmbientais;
     }
 
-    public void setFatoresAmbientais(List<FatoresAmbiente> fatoresAmbientais) {
+    public void setFatoresAmbientais(FatoresAmbiente fatoresAmbientais) {
         this.fatoresAmbientais = fatoresAmbientais;
     }
 
-    public List<FatoresTecnicos> getFatoresTecnicos() {
+    public FatoresTecnicos getFatoresTecnicos() {
         return fatoresTecnicos;
     }
 
-    public void setFatoresTecnicos(List<FatoresTecnicos> fatoresTecnicos) {
+    public void setFatoresTecnicos(FatoresTecnicos fatoresTecnicos) {
         this.fatoresTecnicos = fatoresTecnicos;
     }
 

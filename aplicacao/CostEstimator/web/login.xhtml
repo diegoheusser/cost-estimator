@@ -7,19 +7,27 @@
         <title>Entrar</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:panel header="Login">
-                <h:panelGrid columns="2">
-                    <h:outputText value="Login: "/>
-                    <p:inputText value="#{beanLogin.login}"/>
-                    <h:outputText value="Senha: "/>
-                    <p:password value="#{beanLogin.senha}"/>
-                    <p:commandButton value="Entrar"
-                                     ajax="false"
-                                     action="#{beanLogin.logar()}"/>
-                </h:panelGrid>
-            </p:panel>
-        </h:form>
+        <div style="width: 900px; margin: 0 auto 0">
+            <div style="width: 250px; margin: 0 auto 0; margin-top: 200px">
+                <h:form>
+                    <p:panel header="Login" style="width: 250px">
+                        <h:panelGrid columns="1">
+                            <p:inputText id="login" value="#{beanLogin.login}"
+                                         style="width: 100%"/>
+                            <p:watermark for="login" value="Digite seu usuário"/>
+                            <p:password id="senha" value="#{beanLogin.senha}"
+                                        style="width: 100%"/>
+                            <p:watermark for="senha" value="Digite sua senha"/>
+                            <p:link value="Esqueceu sua senha?"/>
+                        </h:panelGrid>
+                        <p:commandButton value="Entrar"
+                                         ajax="false"
+                                         style="width: 220px"
+                                         action="#{beanLogin.logar()}"/>
+                    </p:panel>
+                </h:form>
+            </div>
+        </div>
     </h:body>
 </html>
 

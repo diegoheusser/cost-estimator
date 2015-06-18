@@ -1,6 +1,9 @@
 package br.udesc.ceavi.costestimator.controle;
 
 import br.udesc.ceavi.costestimator.modelo.Usuario;
+import br.udesc.ceavi.costestimator.util.SHA2;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,8 +19,13 @@ public class LoginBean {
     private String login;
     private String senha;
     
-    public String logar(){
-        return "login";
+    public String logar() throws NoSuchAlgorithmException,
+            UnsupportedEncodingException{
+        usuario = Usuario.buscar(login, SHA2.sha2(senha));
+        if (usuario == null) {
+            return "login";
+        }
+        return "/sistema/index";
     }
 
     public Usuario getUsuario() {

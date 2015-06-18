@@ -9,4 +9,6 @@ import br.udesc.ceavi.costestimator.modelo.Usuario;
  */
 public interface UsuarioDAO extends DefaultDAO<Usuario> {
     
+    public Usuario buscar(String login, String senha);
+    
 }

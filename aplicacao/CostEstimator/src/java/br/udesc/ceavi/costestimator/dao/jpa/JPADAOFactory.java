@@ -1,5 +1,7 @@
 package br.udesc.ceavi.costestimator.dao.jpa;
 
+import br.udesc.ceavi.costestimator.dao.apontamento.ApontamentoDAO;
+import br.udesc.ceavi.costestimator.dao.apontamento.JPAApontamentoDAO;
 import br.udesc.ceavi.costestimator.dao.ator.AtorDAO;
 import br.udesc.ceavi.costestimator.dao.ator.JPAAtorDAO;
 import br.udesc.ceavi.costestimator.dao.casodeuso.CasoDeUsoDAO;
@@ -62,6 +64,11 @@ public class JPADAOFactory extends DAOFactory {
     @Override
     public UsuarioDAO getUsuarioDAO() {
         return new JPAUsuarioDAO();
+    }
+
+    @Override
+    public ApontamentoDAO getApontamentoDAO() {
+        return new JPAApontamentoDAO();
     }
     
 }

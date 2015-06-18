@@ -1,5 +1,6 @@
 package br.udesc.ceavi.costestimator.dao.core;
 
+import br.udesc.ceavi.costestimator.dao.apontamento.ApontamentoDAO;
 import br.udesc.ceavi.costestimator.dao.ator.AtorDAO;
 import br.udesc.ceavi.costestimator.dao.casodeuso.CasoDeUsoDAO;
 import br.udesc.ceavi.costestimator.dao.custo.CustoDAO;
@@ -29,6 +30,7 @@ public abstract class DAOFactory {
         }
     }
     
+    public abstract ApontamentoDAO getApontamentoDAO();
     public abstract AtorDAO getAtorDAO();
     public abstract CasoDeUsoDAO getCasoDeUsoDAO();
     public abstract CustoDAO getCustoDAO();
