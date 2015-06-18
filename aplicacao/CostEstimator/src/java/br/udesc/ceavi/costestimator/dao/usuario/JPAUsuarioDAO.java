@@ -20,15 +20,17 @@ public class JPAUsuarioDAO extends JPADefaultDAO<Usuario> implements UsuarioDAO 
     public Usuario buscar(String login, String senha) {
         EntityManager em = jpaUtil.getEM();
         Usuario u = null;
-        try{
+        try {
             Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha");
             q.setParameter("login", login);
             q.setParameter("senha", senha);
             u = (Usuario) q.getSingleResult();
-        }finally{
+        } catch (Exception ex) {
+            u = null;
+        } finally {
             em.close();
         }
         return u;
     }
-    
+
 }

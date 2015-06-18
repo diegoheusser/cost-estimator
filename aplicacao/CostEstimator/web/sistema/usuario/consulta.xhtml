@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"    
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="titulo">
+        Consulta de usuários
+    </ui:define>
+    <ui:define name="conteudo">
+        <h:form>
+            <p:panel header="Consulta de usuários">
+                <p:dataTable value="#{beanUsuario.usuarios}"
+                             var="u"
+                             emptyMessage="Nenhum registro encontrado">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{u.nome}"/>
+                    </p:column>
+                    <p:column headerText="Login">
+                        <h:outputText value="#{u.login}"/>
+                    </p:column>
+                    <p:column headerText=" Administrador">
+                        
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Novo"
+                                 ajax="false"
+                                 action="#{beanUsuario.novo()}"/>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

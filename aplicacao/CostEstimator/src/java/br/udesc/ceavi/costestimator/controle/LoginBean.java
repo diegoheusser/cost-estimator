@@ -4,8 +4,10 @@ import br.udesc.ceavi.costestimator.modelo.Usuario;
 import br.udesc.ceavi.costestimator.util.SHA2;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -23,9 +25,22 @@ public class LoginBean {
             UnsupportedEncodingException{
         usuario = Usuario.buscar(login, SHA2.sha2(senha));
         if (usuario == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, 
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_WARN,
+                            "Acesso negado",
+                            "login ou senha inválidos"
+                    )
+            );
             return "login";
         }
         return "/sistema/index";
+    }
+    
+    public String logoff(){
+        this.usuario = null;
+        return "login";
     }
 
     public Usuario getUsuario() {
