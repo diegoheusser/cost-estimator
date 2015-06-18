@@ -24,4 +24,5 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 
+
 /aplicacao/CostEstimator/nbproject/private/
