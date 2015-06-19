@@ -28,27 +28,22 @@ public class UsuarioBean {
         try{
             this.usuario.salvar();
         } catch(Exception ex){
-            FacesContext.getCurrentInstance().addMessage(
-                    null, 
-                    new FacesMessage(
-                            FacesMessage.SEVERITY_ERROR,
-                            "Erro",
-                            ex.getMessage()
-                    )
-            );
-            return "/sistema/cadastro";
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,"Erro",ex.getMessage()));
+            return "/sistema/usuario/cadastro";
         }
-        return "/sistema/consulta";
+        return "/sistema/usuario/consulta";
     }
     
     public String cancelar(){
         this.usuario = new Usuario();
-        return "/sistema/consuta";
+        return "/sistema/usuario/consuta";
     }
     
     public String novo(){
         this.usuario = new Usuario();
-        return "/sistema/cadastro";
+        return "/sistema/usuario/cadastro";
     }
 
     public Usuario getUsuario() {

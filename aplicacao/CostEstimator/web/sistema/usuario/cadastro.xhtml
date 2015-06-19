@@ -1,17 +1,65 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"    
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      template="/templates/template.xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <ui:define name="titulo">
-        Cadastro de Usuário
-    </ui:define>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/template.xhtml">
+   
     <ui:define name="conteudo">
-        <h:form>
-            <p:panel header="Cadastro de Usuário">
-                
-            </p:panel>
-        </h:form>
-    </ui:define>
-</ui:composition>
 
+        <p:panel header="Cadastro de Usuários">
+            <h:form>
+                <h:panelGrid columns="2" >
+                    
+                    <p:outputLabel value="Nome:"/>
+                    <p:inputText value="#{beanUsuario.usuario.nome}" 
+                                 required="true" 
+                                 requiredMessage="Campo nome é obrigatório"/>
+
+                    <p:outputLabel value="Login:"/>
+                    <p:inputText value="#{beanUsuario.usuario.login}" 
+                                 required="true" 
+                                 requiredMessage="Campo login é obrigatório"/>
+                    
+                    <p:outputLabel value="Senha"/>
+                    <p:password value="#{beanUsuario.usuario.senha}"
+                                required="true" requiredMessage="Campo Senha é obrigatório"
+                                promptLabel="Informe a senha!"
+                                weakLabel="Fraca!" goodLabel="Boa!" strongLabel="Forte!"
+                                feedback="true"
+                                match="confirma"
+                                redisplay="true"
+                                validatorMessage="As senhas não conferem"
+                                />
+                    
+                    <p:outputLabel value="Confirma Senha"/>
+                    <p:password value="#{beanUsuario.usuario.senha}"
+                                id="confirma"
+                                required="true"
+                                requiredMessage="Confirmação de senha é obrigatório"
+                                redisplay="true"/>
+                    
+                    
+                    <p:outputLabel value="Permissões"/>
+                    <p:fieldset>
+                        <p:selectBooleanCheckbox value="#{beanUsuario.usuario.administrador}" itemLabel="Administrador "/>
+                    </p:fieldset>
+                    
+                </h:panelGrid>
+
+                <p:outputPanel layout="block" style="text-align: center">
+                    <p:commandButton value="Salvar"
+                                     action="#{beanUsuario.salvar()}"
+                                     ajax="false"/>
+                    <p:commandButton value="Cancelar"
+                                     action="#{beanUsuario.cancelar()}"
+                                     ajax="false"
+                                     immediate="true"/>
+                </p:outputPanel>
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+
+</ui:composition>

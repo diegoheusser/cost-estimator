@@ -5,24 +5,20 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title><ui:insert name="titulo"/></title>
+        <title>Cost Estimator</title>
+        <h:outputStylesheet library="css" name="basico.css"/>
     </h:head>
     <h:body>
-        <div id="principal">
-            <header>
-
-            </header>
-            <nav>
-                <ui:include src="menu.xhtml"/>
-            </nav>
-            <section>
-                <ui:insert name="conteudo"/>
-            </section>
-            <footer style="text-align: center">
-                Desenvolvido por Diego e Marco - 2015
-            </footer>
-            <p:growl autoUpdate="true" life="5000" showDetail="true"/>
-        </div>
+        <p:panel header="Cost Estimator"
+                 footer="Desenvolvido por Diego e Marcos - 2015">
+        
+            <ui:include src="/templates/menu.xhtml"/>
+            <br></br>
+            <ui:insert name="conteudo"/>
+            
+        </p:panel>
+        
+        <p:growl life="10000" autoUpdate="true"/>
     </h:body>
 </html>
 

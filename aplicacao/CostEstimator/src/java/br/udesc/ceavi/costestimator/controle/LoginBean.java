@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -16,17 +17,17 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "beanLogin")
 @SessionScoped
 public class LoginBean {
-    
+
     private Usuario usuario;
     private String login;
     private String senha;
-    
+
     public String logar() throws NoSuchAlgorithmException,
-            UnsupportedEncodingException{
+            UnsupportedEncodingException {
         usuario = Usuario.buscar(login, SHA2.sha2(senha));
         if (usuario == null) {
             FacesContext.getCurrentInstance().addMessage(
-                    null, 
+                    null,
                     new FacesMessage(
                             FacesMessage.SEVERITY_WARN,
                             "Acesso negado",
@@ -35,12 +36,18 @@ public class LoginBean {
             );
             return "login";
         }
+        login = "";
+        senha = "";
         return "/sistema/index";
     }
-    
-    public String logoff(){
+
+    public String logoff() {
         this.usuario = null;
-        return "login";
+        HttpSession session
+                = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        session.invalidate();
+        return "/login";
     }
 
     public Usuario getUsuario() {
@@ -66,6 +73,5 @@ public class LoginBean {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
+
 }

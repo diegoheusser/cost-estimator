@@ -26,76 +26,83 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Projeto implements Serializable {
-    
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "projeto_id")
     private int id;
-    
+
     @Column
     private String descricao;
-    
+
     @Column(name = "data_inicio")
     @Temporal(TemporalType.DATE)
     private Date dataInicio;
-    
+
     @Column(name = "data_termino")
     @Temporal(TemporalType.DATE)
     private Date dataTermino;
-    
+
     @ManyToMany
-    @JoinTable( 
+    @JoinTable(
             name = "projeto_funcionario",
-            joinColumns = {@JoinColumn(name = "projeto_id")},
-            inverseJoinColumns = {@JoinColumn(name = "funcionario_id")})
+            joinColumns = {
+                @JoinColumn(name = "projeto_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "funcionario_id")})
     private List<Funcionario> funcionarios;
-    
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    
+
     @OneToMany(mappedBy = "projeto")
     private List<Ator> atores;
-    
+
     @OneToMany(mappedBy = "projeto")
     private List<CasoDeUso> casoDeUsos;
-    
+
     @OneToOne(mappedBy = "projeto")
     private FatoresAmbiente fatoresAmbientais;
-    
+
     @OneToOne(mappedBy = "projeto")
     private FatoresTecnicos fatoresTecnicos;
-    
+
     @OneToMany(mappedBy = "projeto")
     private List<Custo> custos;
 
-    public void salvar(){
+    public void salvar() {
         ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
         dao.salvar(this);
     }
-    
-    public static void remover(int id){
+
+    public static void remover(int id) {
         ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
         dao.remover(id);
     }
-    
-    public static List<Projeto> listar(){
+
+    public static List<Projeto> listar() {
         ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
         return dao.listar();
     }
-    
-    public static Projeto buscar(int id){
+
+    public static List<Projeto> listar(int id) {
+        ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
+        return dao.listar(id);
+    }
+
+    public static Projeto buscar(int id) {
         ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
         return dao.buscar(id);
     }
-    
-    public Projeto(){
+
+    public Projeto() {
         this.funcionarios = new ArrayList<>();
         this.atores = new ArrayList<>();
         this.casoDeUsos = new ArrayList<>();
         this.custos = new ArrayList<>();
     }
-    
+
     public int getId() {
         return id;
     }
@@ -183,6 +190,5 @@ public class Projeto implements Serializable {
     public void setCustos(List<Custo> custos) {
         this.custos = custos;
     }
-    
-    
+
 }

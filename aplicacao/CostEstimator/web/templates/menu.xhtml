@@ -1,16 +1,26 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
     <h:form>
         <p:menubar>
-            <p:menuitem value="Home"
-                        action="/sistema/index"/>
-            <p:menuitem value="Usuário"
-                        action="/sistema/usuario/consulta"/>
-            <p:menuitem value="Logoff"
-                        action="login"/>
+            <p:menuitem value="Home" url="/sistema/index.jsf"/>
+
+            <p:submenu label="Administração"
+                       rendered="#{beanLogin.usuario.administrador}">
+                <p:menuitem value="Usuarios" url="/sistema/usuario/consulta.jsf"/>  
+            </p:submenu>
+            
+            <p:menuitem value="Funcionários" url="/sistema/funcionario/consulta.jsf"/>
+            
+            <p:menuitem value="Projetos" url="/sistema/projeto/consulta.jsf"/>
+
+            <p:menuitem value="logoff" action="#{beanLogin.logoff()}"/>
         </p:menubar>
     </h:form>
+
+
 </ui:composition>
 
