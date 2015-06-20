@@ -1,0 +1,45 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/template.xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+    <ui:define name="conteudo">
+
+        <p:panel header="Ator">
+            <h:form>
+                <h:panelGrid columns="2" >
+                    
+                    <p:outputLabel value="Descrição: "/>
+                    <p:inputText value="#{beanAtor.ator.descricao}" 
+                                 required="true" 
+                                 requiredMessage="Campo descrição é obrigatório"/>
+
+                    <p:outputLabel value="Complexidade:"/>
+                    <p:selectOneMenu value="#{beanAtor.ator.complexidade}">
+                        <f:selectItem itemLabel="Simples" itemValue="#{beanAtor.nivel.simples}"/>
+                        <f:selectItem itemLabel="Médio" itemValue="#{beanAtor.nivel.medio}"/>
+                        <f:selectItem itemLabel="Complexo" itemValue="#{beanAtor.nivel.complexo}"/>
+                    </p:selectOneMenu>
+                    
+                    
+                </h:panelGrid>
+
+                <p:outputPanel layout="block" style="text-align: center">
+                    <p:commandButton value="Salvar"
+                                     action="#{beanAtor.salvar()}"
+                                     ajax="false"/>
+                    <p:commandButton value="Cancelar"
+                                     action="#{beanAtor.cancelar()}"
+                                     ajax="false"
+                                     immediate="true"/>
+                </p:outputPanel>
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+
+</ui:composition>

@@ -17,5 +17,23 @@ public enum Complexidade {
     public int getValor() {
         return valor;
     }
+    
+    @Override
+    public String toString(){
+        switch(valor){
+            case 1:{
+                return "Simples";
+            }
+            case 2:{
+                return "Médio";
+            }
+            case 3:{
+                return "Complexo";
+            }
+            default:{
+                return "";
+            }
+        }
+    }
 
 }

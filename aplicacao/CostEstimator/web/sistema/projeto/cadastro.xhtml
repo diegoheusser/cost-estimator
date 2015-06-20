@@ -4,13 +4,13 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     template="/templates/template.xhtml">
-   
+
     <ui:define name="conteudo">
 
         <p:panel header="Cadastro de Funcionário">
             <h:form>
                 <h:panelGrid columns="2" >
-                    
+
                     <p:outputLabel value="Descrição: "/>
                     <p:inputText value="#{beanProjeto.projeto.descricao}" 
                                  required="true" 
@@ -18,11 +18,62 @@
 
                     <p:outputLabel value="Data de inicio: "/>
                     <p:calendar value="#{beanProjeto.projeto.dataInicio}"/>
-                    
+
                     <p:outputLabel value="Data de termino: "/>
                     <p:calendar value="#{beanProjeto.projeto.dataTermino}"/>
-                    
+
                 </h:panelGrid>
+
+                <p:panel header="Atores" toggleable="true">
+                    <p:dataTable value="#{beanProjeto.projeto.atores}"
+                                 var="at"
+                                 emptyMessage="Nenhum ator encontrado!">
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{at.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Complexidade">
+                            <h:outputText value="#{at.complexidade.toString()}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton value="Novo"
+                                     action="#{beanAtor.novo()}"
+                                     ajax="false"
+                                     immediate="true"/>
+                </p:panel>
+
+                <p:panel header="Caso de Usos" toggleable="true">
+                    <p:dataTable value="#{beanProjeto.projeto.casoDeUsos}"
+                                 var="uc"
+                                 emptyMessage="Nenhum caso de uso encontrado!">
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{uc.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Complexidade">
+                            <h:outputText value="#{uc.complexidade.toString()}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton value="Novo"
+                                     action="#{beanCasoDeUso.novo()}"
+                                     ajax="false"
+                                     immediate="true"/>
+                </p:panel>
+
+                <p:panel header="Custos" toggleable="true">
+                    <p:dataTable value="#{beanProjeto.projeto.custos}"
+                                 var="ct"
+                                 emptyMessage="Nenhum custo encontrado!">
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{ct.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Valor">
+                            <h:outputText value="R$  #{ct.valor}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton value="Novo"
+                                     action="#{beanCusto.novo()}"
+                                     ajax="false"
+                                     immediate="true"/>
+                </p:panel>
 
                 <p:outputPanel layout="block" style="text-align: center">
                     <p:commandButton value="Salvar"
@@ -33,7 +84,6 @@
                                      ajax="false"
                                      immediate="true"/>
                 </p:outputPanel>
-
             </h:form>
         </p:panel>
     </ui:define>
