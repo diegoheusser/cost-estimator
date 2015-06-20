@@ -1,7 +1,7 @@
 package br.udesc.ceavi.costestimator.controle;
 
-import br.udesc.ceavi.costestimator.modelo.Ator;
 import br.udesc.ceavi.costestimator.modelo.Custo;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -15,27 +15,38 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class CustoBean {
 
+    private final String telaCadastroCusto = "/sistema/projeto/custo/cadastro";
+    private final String telaCadastroProjeto = "/sistema/projeto/cadastro";
     private Custo custo;
 
-    public String salvar() {
-        HttpSession session
-                = (HttpSession) FacesContext.getCurrentInstance()
-                .getExternalContext().getSession(false);
-        ProjetoBean beanProjeto = (ProjetoBean) session.getAttribute("beanProjeto");
-        custo.setProjeto(beanProjeto.getProjeto());
-        beanProjeto.getProjeto().getCustos().add(custo);
+    public String alterar(Custo ct) {
+        this.custo = ct;
+        return telaCadastroCusto;
+    }
 
-        return "/sistema/projeto/cadastro";
+    public String salvar() {
+        try {
+            custo.salvar();
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage(
+                                    FacesMessage.SEVERITY_ERROR,
+                                    "Erro",
+                                    ex.getMessage()
+                            ));
+            return telaCadastroCusto;
+        }
+        return telaCadastroProjeto;
     }
 
     public String cancelar() {
         custo = new Custo();
-        return "/sistema/projeto/cadastro";
+        return telaCadastroProjeto;
     }
 
     public String novo() {
         custo = new Custo();
-        return "/sistema/projeto/custo/cadastro";
+        return telaCadastroCusto;
     }
 
     public Custo getCusto() {

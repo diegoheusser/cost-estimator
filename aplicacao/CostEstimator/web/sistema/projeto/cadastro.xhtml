@@ -34,6 +34,12 @@
                         <p:column headerText="Complexidade">
                             <h:outputText value="#{at.complexidade.toString()}"/>
                         </p:column>
+                        <p:column>
+                            <p:commandButton icon="ui-icon-pencil"
+                                             ajax="false"
+                                             immediate="true"
+                                             action="#{beanAtor.alterar(at)}"/>
+                        </p:column>
                     </p:dataTable>
                     <p:commandButton value="Novo"
                                      action="#{beanAtor.novo()}"
@@ -51,6 +57,12 @@
                         <p:column headerText="Complexidade">
                             <h:outputText value="#{uc.complexidade.toString()}"/>
                         </p:column>
+                        <p:column>
+                            <p:commandButton icon="ui-icon-pencil"
+                                             ajax="false"
+                                             immediate="true"
+                                             action="#{beanCasoDeUso.alterar(uc)}"/>
+                        </p:column>
                     </p:dataTable>
                     <p:commandButton value="Novo"
                                      action="#{beanCasoDeUso.novo()}"
@@ -67,6 +79,12 @@
                         </p:column>
                         <p:column headerText="Valor">
                             <h:outputText value="R$  #{ct.valor}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton icon="ui-icon-pencil"
+                                             ajax="false"
+                                             immediate="true"
+                                             action="#{beanCusto.alterar(ct)}"/>
                         </p:column>
                     </p:dataTable>
                     <p:commandButton value="Novo"

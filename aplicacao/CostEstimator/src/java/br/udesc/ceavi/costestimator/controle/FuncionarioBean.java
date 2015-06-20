@@ -26,6 +26,11 @@ public class FuncionarioBean {
         this.funcionarios = Funcionario.listar();
     }
 
+    public String alterar(Funcionario fu){
+        this.funcionario = fu;
+        return telaCadastro;
+    }
+    
     public String novo() {
         this.funcionario = new Funcionario();
         return telaCadastro;

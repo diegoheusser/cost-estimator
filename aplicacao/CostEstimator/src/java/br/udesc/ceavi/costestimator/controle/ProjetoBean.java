@@ -30,6 +30,11 @@ public class ProjetoBean {
         this.projeto = new Projeto();
         this.projetos = Projeto.listar(beanLogin.getUsuario().getId());
     }
+    
+    public String alterar(Projeto pr){
+        this.projeto = pr;
+        return telaCadastro;
+    }
 
     public String novo() {
         this.projeto = new Projeto();

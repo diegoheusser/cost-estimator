@@ -10,30 +10,36 @@
 
     <ui:define name="conteudo">
         <p:panel header="Consulta de Projetos">
-
-            <p:dataTable value="#{beanProjeto.projetos}" var="pr"
-                         emptyMessage="Nenhum projeto cadastrado"
-                         id="listagem">
-
-                <p:column headerText="Descrição">
-                    <h:outputText value="#{pr.descricao}"/>
-                </p:column>
-
-                <p:column headerText="Data de Inicio">
-                    <h:outputText value="#{pr.dataInicio}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-                </p:column>
-
-                <p:column headerText="Data de Término">
-                    <h:outputText value="#{pr.dataTermino}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-                </p:column>
-
-            </p:dataTable>
-
             <h:form>
+                <p:dataTable value="#{beanProjeto.projetos}" var="pr"
+                             emptyMessage="Nenhum projeto cadastrado"
+                             id="listagem">
+
+                    <p:column headerText="Descrição">
+                        <h:outputText value="#{pr.descricao}"/>
+                    </p:column>
+
+                    <p:column headerText="Data de Inicio">
+                        <h:outputText value="#{pr.dataInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Data de Término">
+                        <h:outputText value="#{pr.dataTermino}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton icon="ui-icon-pencil"
+                                         ajax="false"
+                                         action="#{beanProjeto.alterar(pr)}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+
                 <p:commandButton value="Novo Projeto" 
                                  action="#{beanProjeto.novo()}"
                                  ajax="false"/>
