@@ -21,8 +21,17 @@
                 <p:column headerText="Login">
                     <h:outputText value="#{usu.login}"/>
                 </p:column>
-                
+
                 <p:column headerText="Permissões">
+                    <h:outputText value="#{usu.permissoes}"/>
+                </p:column>
+
+                <p:column>
+                    <h:form>
+                        <p:commandButton icon="ui-icon-pencil"
+                                         ajax="false"
+                                         action="#{beanUsuario.alterar(usu)}"/>
+                    </h:form>
                 </p:column>
 
             </p:dataTable>

@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
 
     @Column
     private String login;
-
+    
     @Column
     private String senha;
 
@@ -121,4 +121,7 @@ public class Usuario implements Serializable {
         this.projetos = projetos;
     }
 
+    public String getPermissoes(){
+        return administrador ? "Administrador e Gerente" : "Gerente";
+    }
 }
