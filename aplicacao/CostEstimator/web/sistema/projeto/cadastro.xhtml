@@ -9,90 +9,96 @@
 
         <p:panel header="Cadastro de Funcionário">
             <h:form>
-                <h:panelGrid columns="2" >
+                <p:tabView>
+                    <p:tab title="Geral">
+                        <h:panelGrid columns="2" >
 
-                    <p:outputLabel value="Descrição: "/>
-                    <p:inputText value="#{beanProjeto.projeto.descricao}" 
-                                 required="true" 
-                                 requiredMessage="Campo descrição é obrigatório"/>
+                            <p:outputLabel value="Descrição: "/>
+                            <p:inputText value="#{beanProjeto.projeto.descricao}" 
+                                         required="true" 
+                                         requiredMessage="Campo descrição é obrigatório"/>
 
-                    <p:outputLabel value="Data de inicio: "/>
-                    <p:calendar value="#{beanProjeto.projeto.dataInicio}"/>
+                            <p:outputLabel value="Data de inicio: "/>
+                            <p:calendar value="#{beanProjeto.projeto.dataInicio}"/>
 
-                    <p:outputLabel value="Data de termino: "/>
-                    <p:calendar value="#{beanProjeto.projeto.dataTermino}"/>
+                            <p:outputLabel value="Data de termino: "/>
+                            <p:calendar value="#{beanProjeto.projeto.dataTermino}"/>
 
-                </h:panelGrid>
-
-                <p:panel header="Atores" toggleable="true">
-                    <p:dataTable value="#{beanProjeto.projeto.atores}"
-                                 var="at"
-                                 emptyMessage="Nenhum ator encontrado!">
-                        <p:column headerText="Descrição">
-                            <h:outputText value="#{at.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Complexidade">
-                            <h:outputText value="#{at.complexidade.toString()}"/>
-                        </p:column>
-                        <p:column>
-                            <p:commandButton icon="ui-icon-pencil"
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Casos de usos">
+                        <p:panel header="Atores" toggleable="true">
+                            <p:dataTable value="#{beanProjeto.projeto.atores}"
+                                         var="at"
+                                         emptyMessage="Nenhum ator encontrado!">
+                                <p:column headerText="Descrição">
+                                    <h:outputText value="#{at.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Complexidade">
+                                    <h:outputText value="#{at.complexidade.toString()}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton icon="ui-icon-pencil"
+                                                     ajax="false"
+                                                     immediate="true"
+                                                     action="#{beanAtor.alterar(at)}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:commandButton value="Novo"
+                                             action="#{beanAtor.novo()}"
                                              ajax="false"
-                                             immediate="true"
-                                             action="#{beanAtor.alterar(at)}"/>
-                        </p:column>
-                    </p:dataTable>
-                    <p:commandButton value="Novo"
-                                     action="#{beanAtor.novo()}"
-                                     ajax="false"
-                                     immediate="true"/>
-                </p:panel>
+                                             immediate="true"/>
+                        </p:panel>
 
-                <p:panel header="Caso de Usos" toggleable="true">
-                    <p:dataTable value="#{beanProjeto.projeto.casoDeUsos}"
-                                 var="uc"
-                                 emptyMessage="Nenhum caso de uso encontrado!">
-                        <p:column headerText="Descrição">
-                            <h:outputText value="#{uc.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Complexidade">
-                            <h:outputText value="#{uc.complexidade.toString()}"/>
-                        </p:column>
-                        <p:column>
-                            <p:commandButton icon="ui-icon-pencil"
+                        <p:panel header="Caso de Usos" toggleable="true">
+                            <p:dataTable value="#{beanProjeto.projeto.casoDeUsos}"
+                                         var="uc"
+                                         emptyMessage="Nenhum caso de uso encontrado!">
+                                <p:column headerText="Descrição">
+                                    <h:outputText value="#{uc.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Complexidade">
+                                    <h:outputText value="#{uc.complexidade.toString()}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton icon="ui-icon-pencil"
+                                                     ajax="false"
+                                                     immediate="true"
+                                                     action="#{beanCasoDeUso.alterar(uc)}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:commandButton value="Novo"
+                                             action="#{beanCasoDeUso.novo()}"
                                              ajax="false"
-                                             immediate="true"
-                                             action="#{beanCasoDeUso.alterar(uc)}"/>
-                        </p:column>
-                    </p:dataTable>
-                    <p:commandButton value="Novo"
-                                     action="#{beanCasoDeUso.novo()}"
-                                     ajax="false"
-                                     immediate="true"/>
-                </p:panel>
-
-                <p:panel header="Custos" toggleable="true">
-                    <p:dataTable value="#{beanProjeto.projeto.custos}"
-                                 var="ct"
-                                 emptyMessage="Nenhum custo encontrado!">
-                        <p:column headerText="Descrição">
-                            <h:outputText value="#{ct.descricao}"/>
-                        </p:column>
-                        <p:column headerText="Valor">
-                            <h:outputText value="R$  #{ct.valor}"/>
-                        </p:column>
-                        <p:column>
-                            <p:commandButton icon="ui-icon-pencil"
+                                             immediate="true"/>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab title="Custos">
+                        <p:panel header="Custos" toggleable="true">
+                            <p:dataTable value="#{beanProjeto.projeto.custos}"
+                                         var="ct"
+                                         emptyMessage="Nenhum custo encontrado!">
+                                <p:column headerText="Descrição">
+                                    <h:outputText value="#{ct.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Valor">
+                                    <h:outputText value="R$  #{ct.valor}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton icon="ui-icon-pencil"
+                                                     ajax="false"
+                                                     immediate="true"
+                                                     action="#{beanCusto.alterar(ct)}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:commandButton value="Novo"
+                                             action="#{beanCusto.novo()}"
                                              ajax="false"
-                                             immediate="true"
-                                             action="#{beanCusto.alterar(ct)}"/>
-                        </p:column>
-                    </p:dataTable>
-                    <p:commandButton value="Novo"
-                                     action="#{beanCusto.novo()}"
-                                     ajax="false"
-                                     immediate="true"/>
-                </p:panel>
-
+                                             immediate="true"/>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab title="Equipe"></p:tab>
+                </p:tabView>
                 <p:outputPanel layout="block" style="text-align: center">
                     <p:commandButton value="Salvar"
                                      action="#{beanProjeto.salvar()}"
