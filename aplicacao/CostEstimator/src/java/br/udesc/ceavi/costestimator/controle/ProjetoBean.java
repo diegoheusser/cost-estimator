@@ -1,8 +1,8 @@
 package br.udesc.ceavi.costestimator.controle;
 
+import br.udesc.ceavi.costestimator.modelo.Custo;
 import br.udesc.ceavi.costestimator.modelo.Funcionario;
 import br.udesc.ceavi.costestimator.modelo.Projeto;
-import br.udesc.ceavi.costestimator.modelo.Usuario;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -110,8 +110,6 @@ public class ProjetoBean {
                     .getExternalContext().getSession(false);
             LoginBean beanLogin = (LoginBean) session.getAttribute("beanLogin");
             projeto.setUsuario(beanLogin.getUsuario());
-            projeto.getFatoresAmbientais().setProjeto(projeto);
-            projeto.getFatoresTecnicos().setProjeto(projeto);
             projeto.salvar();
 
             FacesContext.getCurrentInstance().addMessage(null,

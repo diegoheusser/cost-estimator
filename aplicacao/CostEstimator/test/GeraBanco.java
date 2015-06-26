@@ -1,4 +1,4 @@
-package br.udesc.ceavi.costestimator.util;
+
 
 import br.udesc.ceavi.costestimator.modelo.Usuario;
 import java.io.UnsupportedEncodingException;
@@ -13,9 +13,9 @@ public class GeraBanco {
             UnsupportedEncodingException {
         Usuario u = new Usuario();
         u.setAdministrador(true);
-        u.setLogin("root");
+        u.setLogin("admin");
         u.setNome("Administrador");
-        u.setSenha("root");
+        u.setSenha("admin");
         u.salvar();
     }
 }

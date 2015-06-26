@@ -65,30 +65,6 @@ public class FatoresTecnicos implements Serializable {
     @Column
     private double T13;
     
-    @OneToOne
-    @JoinColumn(name = "projeto_id")
-    private Projeto projeto;
-
-    public void salvar(){
-        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
-        dao.salvar(this);
-    }
-    
-    public static void remover(int id){
-        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
-        dao.remover(id);
-    }
-    
-    public static List<FatoresTecnicos> listar(){
-        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
-        return dao.listar();
-    }
-    
-    public static FatoresTecnicos buscar(int id){
-        FatoresTecnicosDAO dao = DAOFactory.getDAOFactory().getFatoresTecnicosDAO();
-        return dao.buscar(id);
-    }
-    
     public int getId() {
         return id;
     }
@@ -201,13 +177,4 @@ public class FatoresTecnicos implements Serializable {
         this.T13 = T13;
     }
 
-    public Projeto getProjeto() {
-        return projeto;
-    }
-
-    public void setProjeto(Projeto projeto) {
-        this.projeto = projeto;
-    }
-    
-    
 }

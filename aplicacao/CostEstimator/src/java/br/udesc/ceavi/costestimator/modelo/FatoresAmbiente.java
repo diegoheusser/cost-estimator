@@ -50,30 +50,6 @@ public class FatoresAmbiente implements Serializable {
     @Column
     private double E8;
     
-    @OneToOne
-    @JoinColumn(name = "projeto_id")
-    private Projeto projeto;
-
-    public void salvar(){
-        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
-        dao.salvar(this);
-    }
-    
-    public static void remover(int id){
-        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
-        dao.remover(id);
-    }
-    
-    public static List<FatoresAmbiente> listar(){
-        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
-        return dao.listar();
-    }
-    
-    public static FatoresAmbiente buscar(int id){
-        FatoresAmbienteDAO dao = DAOFactory.getDAOFactory().getFatoresAmbienteDAO();
-        return dao.buscar(id);
-    }
-    
     public int getId() {
         return id;
     }
@@ -145,14 +121,5 @@ public class FatoresAmbiente implements Serializable {
     public void setE8(double E8) {
         this.E8 = E8;
     }
-
-    public Projeto getProjeto() {
-        return projeto;
-    }
-
-    public void setProjeto(Projeto projeto) {
-        this.projeto = projeto;
-    }
-    
     
 }

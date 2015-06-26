@@ -36,24 +36,9 @@ public class Ator implements Serializable {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
-    public void salvar() {
-        AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
-        dao.salvar(this);
-    }
-
-    public static void remover(int id) {
+ public static void remover(int id) {
         AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
         dao.remover(id);
-    }
-
-    public static List<Ator> listar() {
-        AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
-        return dao.listar();
-    }
-
-    public static Ator buscar(int id) {
-        AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
-        return dao.buscar(id);
     }
 
     public int getId() {

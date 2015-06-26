@@ -5,6 +5,7 @@ import br.udesc.ceavi.costestimator.dao.core.DAOFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -40,29 +41,15 @@ public class CasoDeUso implements Serializable {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
     
-    @OneToMany(mappedBy = "casoDeUso")
+    @OneToMany( mappedBy = "casoDeUso",cascade = CascadeType.ALL)
     private List<Apontamento> apontamentos;
-
-    public void salvar() {
-        CasoDeUsoDAO dao = DAOFactory.getDAOFactory().getCasoDeUsoDAO();
-        dao.salvar(this);
-    }
 
     public static void remover(int id) {
         CasoDeUsoDAO dao = DAOFactory.getDAOFactory().getCasoDeUsoDAO();
         dao.remover(id);
     }
 
-    public static List<CasoDeUso> listar() {
-        CasoDeUsoDAO dao = DAOFactory.getDAOFactory().getCasoDeUsoDAO();
-        return dao.listar();
-    }
-
-    public static CasoDeUso buscar(int id) {
-        CasoDeUsoDAO dao = DAOFactory.getDAOFactory().getCasoDeUsoDAO();
-        return dao.buscar(id);
-    }
-    
+ 
     public CasoDeUso(){
         this.apontamentos = new ArrayList<>();
     }

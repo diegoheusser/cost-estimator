@@ -63,14 +63,22 @@ public class Projeto implements Serializable {
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<CasoDeUso> casoDeUsos;
 
-    @OneToOne(mappedBy = "projeto", cascade = CascadeType.ALL)
+    @OneToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "fatores_ambientais_id")
     private FatoresAmbiente fatoresAmbientais;
 
-    @OneToOne(mappedBy = "projeto", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fatores_tecnicos_id")
     private FatoresTecnicos fatoresTecnicos;
 
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<Custo> custos;
+    
+    @Column(name = "custo_estimado")
+    private double custoEstimado;
+    
+    @Column(name = "custo_real")
+    private double custoReal;
 
 
     public void salvar() {
@@ -193,6 +201,22 @@ public class Projeto implements Serializable {
 
     public void setCustos(List<Custo> custos) {
         this.custos = custos;
+    }
+
+    public double getCustoEstimado() {
+        return custoEstimado;
+    }
+
+    public void setCustoEstimado(double custoEstimado) {
+        this.custoEstimado = custoEstimado;
+    }
+
+    public double getCustoReal() {
+        return custoReal;
+    }
+
+    public void setCustoReal(double custoReal) {
+        this.custoReal = custoReal;
     }
 
 }
