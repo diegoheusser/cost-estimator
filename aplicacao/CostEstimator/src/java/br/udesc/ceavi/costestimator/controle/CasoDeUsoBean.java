@@ -19,7 +19,6 @@ public class CasoDeUsoBean {
     private final String telaCadastroCasoDeUso = "/sistema/projeto/casodeuso/cadastro";
     private final String telaCadastroProjeto = "/sistema/projeto/cadastro";
     private CasoDeUso casoDeUso;
-    private Nivel nivel;
 
     public String alterar(CasoDeUso uc) {
         this.casoDeUso = uc;
@@ -90,12 +89,5 @@ public class CasoDeUsoBean {
         this.casoDeUso = casoDeUso;
     }
 
-    public Nivel getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
-    }
 
 }

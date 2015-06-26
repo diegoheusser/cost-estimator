@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Projeto implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataTermino;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "projeto_funcionario",
             joinColumns = {
@@ -52,23 +53,23 @@ public class Projeto implements Serializable {
                 @JoinColumn(name = "funcionario_id")})
     private List<Funcionario> funcionarios;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "projeto")
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<Ator> atores;
 
-    @OneToMany(mappedBy = "projeto")
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<CasoDeUso> casoDeUsos;
 
-    @OneToOne(mappedBy = "projeto")
+    @OneToOne(mappedBy = "projeto", cascade = CascadeType.ALL)
     private FatoresAmbiente fatoresAmbientais;
 
-    @OneToOne(mappedBy = "projeto")
+    @OneToOne(mappedBy = "projeto", cascade = CascadeType.ALL)
     private FatoresTecnicos fatoresTecnicos;
 
-    @OneToMany(mappedBy = "projeto")
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<Custo> custos;
 
 

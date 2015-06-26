@@ -1,11 +1,13 @@
 package br.udesc.ceavi.costestimator.controle;
 
 import br.udesc.ceavi.costestimator.modelo.Funcionario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,12 +20,15 @@ public class FuncionarioBean {
     private final String telaCadastro = "/sistema/funcionario/cadastro";
     private final String telaConsulta = "/sistema/funcionario/consulta";
     private final String telaFuncionarios = "/sistema/funcionario/funcionarios";
+    private final String telaCadastroProjeto = "/sistema/projeto/cadastro";
 
     private Funcionario funcionario;
     private List<Funcionario> funcionarios;
+    private List<Funcionario> funcionariosSelecionados;
 
     public FuncionarioBean() {
         this.funcionario = new Funcionario();
+        funcionariosSelecionados = new ArrayList<>();
         atualizaFuncionarios();
     }
 
@@ -31,22 +36,14 @@ public class FuncionarioBean {
         this.funcionarios = Funcionario.listar();
     }
     
-        public void remover(Funcionario f) {
-        try {
 
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_INFO, "Removido", ""
-                    )
-            );
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
-                    )
-            );
-        }
+    public String adicionar(){
+        HttpSession session
+                = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        ProjetoBean beanProjeto = (ProjetoBean) session.getAttribute("beanProjeto");
+        beanProjeto.adicionar(funcionariosSelecionados);
+        return telaCadastroProjeto;
     }
 
     public void excluir(Funcionario f) {
@@ -122,6 +119,14 @@ public class FuncionarioBean {
 
     public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public List<Funcionario> getFuncionariosSelecionados() {
+        return funcionariosSelecionados;
+    }
+
+    public void setFuncionariosSelecionados(List<Funcionario> funcionariosSelecionados) {
+        this.funcionariosSelecionados = funcionariosSelecionados;
     }
 
 }

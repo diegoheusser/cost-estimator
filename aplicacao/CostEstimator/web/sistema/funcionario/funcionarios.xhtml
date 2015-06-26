@@ -11,6 +11,9 @@
             <h:form>
                 <p:dataTable value="#{beanFuncionario.funcionarios}" var="fu"
                              emptyMessage="Nenhum funcionário cadastrado"
+                             rowKey="#{fu.id}"
+                             selection="#{beanFuncionario.funcionariosSelecionados}"
+                             selectionMode="multiple"
                              id="listagem">
 
                     <p:column headerText="Nome">

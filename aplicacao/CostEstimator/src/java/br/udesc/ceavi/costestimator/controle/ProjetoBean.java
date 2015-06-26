@@ -1,5 +1,6 @@
 package br.udesc.ceavi.costestimator.controle;
 
+import br.udesc.ceavi.costestimator.modelo.Funcionario;
 import br.udesc.ceavi.costestimator.modelo.Projeto;
 import br.udesc.ceavi.costestimator.modelo.Usuario;
 import java.util.List;
@@ -29,13 +30,21 @@ public class ProjetoBean {
         this.projeto = new Projeto();
         atualizaProjetos();
     }
-    
-    public String apontar(Projeto pr){
+
+    public String apontar(Projeto pr) {
         return telaApontamentos;
     }
-    
+
     public String calcular(Projeto pr) {
         return telaUCP;
+    }
+    
+    public void adicionar(List<Funcionario> funcionarios){
+        for(Funcionario f : funcionarios){
+            if(!projeto.getFuncionarios().contains(f)){
+                projeto.getFuncionarios().add(f);
+            }
+        }
     }
 
     private void atualizaProjetos() {
@@ -65,6 +74,25 @@ public class ProjetoBean {
         }
     }
 
+    public void remover(Funcionario f) {
+        try {
+            projeto.getFuncionarios().remove(f);
+            f.getProjetos().remove(projeto);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
     public String alterar(Projeto pr) {
         this.projeto = pr;
         return telaCadastro;
@@ -82,6 +110,8 @@ public class ProjetoBean {
                     .getExternalContext().getSession(false);
             LoginBean beanLogin = (LoginBean) session.getAttribute("beanLogin");
             projeto.setUsuario(beanLogin.getUsuario());
+            projeto.getFatoresAmbientais().setProjeto(projeto);
+            projeto.getFatoresTecnicos().setProjeto(projeto);
             projeto.salvar();
 
             FacesContext.getCurrentInstance().addMessage(null,

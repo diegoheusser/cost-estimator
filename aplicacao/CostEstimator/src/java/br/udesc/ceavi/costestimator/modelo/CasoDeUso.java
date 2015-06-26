@@ -34,8 +34,7 @@ public class CasoDeUso implements Serializable {
     private String descricao;
 
     @Column
-    @Enumerated(EnumType.ORDINAL)
-    private Complexidade complexidade;
+    private int complexidade;
 
     @ManyToOne
     @JoinColumn(name = "projeto_id")
@@ -84,11 +83,11 @@ public class CasoDeUso implements Serializable {
         this.descricao = descricao;
     }
 
-    public Complexidade getComplexidade() {
+    public int getComplexidade() {
         return complexidade;
     }
 
-    public void setComplexidade(Complexidade complexidade) {
+    public void setComplexidade(int complexidade) {
         this.complexidade = complexidade;
     }
 
@@ -106,6 +105,23 @@ public class CasoDeUso implements Serializable {
 
     public void setApontamentos(List<Apontamento> apontamentos) {
         this.apontamentos = apontamentos;
+    }
+    
+    public String getComp(){
+        switch(complexidade){
+            case 1: {
+                return "Simples";
+            }
+            case 2: {
+                return "Médio";
+            }
+            case 3: {
+                return "Complexo";
+            }
+            default: {
+                return "";
+            }
+        }
     }
 
 }

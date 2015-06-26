@@ -19,9 +19,10 @@
 
                     <p:outputLabel value="Complexidade:"/>
                     <p:selectOneMenu value="#{beanCasoDeUso.casoDeUso.complexidade}">
-                        <f:selectItem itemLabel="Simples" itemValue="#{beanCasoDeUso.nivel.simples}"/>
-                        <f:selectItem itemLabel="Médio" itemValue="#{beanCasoDeUso.nivel.medio}"/>
-                        <f:selectItem itemLabel="Complexo" itemValue="#{beanCasoDeUso.nivel.complexo}"/>
+                        <f:convertNumber integerOnly="true"/>
+                        <f:selectItem itemLabel="Simples" itemValue="1"/>
+                        <f:selectItem itemLabel="Médio" itemValue="1"/>
+                        <f:selectItem itemLabel="Complexo" itemValue="1"/>
                     </p:selectOneMenu>
                     
                     

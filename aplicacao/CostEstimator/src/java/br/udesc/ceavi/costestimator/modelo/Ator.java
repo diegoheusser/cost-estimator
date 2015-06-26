@@ -25,34 +25,33 @@ public class Ator implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ator_id")
     private int id;
-    
+
     @Column
     private String descricao;
-    
+
     @Column
-    @Enumerated(EnumType.ORDINAL)
-    private Complexidade complexidade;
-    
+    private int complexidade;
+
     @ManyToOne
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
-    
-    public void salvar(){
+
+    public void salvar() {
         AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
         dao.salvar(this);
     }
-    
-    public static void remover(int id){
+
+    public static void remover(int id) {
         AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
         dao.remover(id);
     }
-    
-    public static List<Ator> listar(){
+
+    public static List<Ator> listar() {
         AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
         return dao.listar();
     }
-    
-    public static Ator buscar(int id){
+
+    public static Ator buscar(int id) {
         AtorDAO dao = DAOFactory.getDAOFactory().getAtorDAO();
         return dao.buscar(id);
     }
@@ -73,11 +72,11 @@ public class Ator implements Serializable {
         this.descricao = descricao;
     }
 
-    public Complexidade getComplexidade() {
+    public int getComplexidade() {
         return complexidade;
     }
 
-    public void setComplexidade(Complexidade complexidade) {
+    public void setComplexidade(int complexidade) {
         this.complexidade = complexidade;
     }
 
@@ -88,6 +87,21 @@ public class Ator implements Serializable {
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
     }
-    
-    
+
+    public String getComp() {
+        switch (complexidade) {
+            case 1: {
+                return "Simples";
+            }
+            case 2: {
+                return "Médio";
+            }
+            case 3: {
+                return "Complexo";
+            }
+            default: {
+                return "";
+            }
+        }
+    }
 }

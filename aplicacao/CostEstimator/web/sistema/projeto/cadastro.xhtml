@@ -36,7 +36,7 @@
                                     <h:outputText value="#{at.descricao}"/>
                                 </p:column>
                                 <p:column headerText="Complexidade">
-                                    <h:outputText value="#{at.complexidade.toString()}"/>
+                                    <h:outputText value="#{at.comp}"/>
                                 </p:column>
                                 <p:column>
                                     <p:commandButton icon="ui-icon-pencil"
@@ -67,7 +67,7 @@
                                     <h:outputText value="#{uc.descricao}"/>
                                 </p:column>
                                 <p:column headerText="Complexidade">
-                                    <h:outputText value="#{uc.complexidade.toString()}"/>
+                                    <h:outputText value="#{uc.comp}"/>
                                 </p:column>
                                 <p:column>
                                     <p:commandButton icon="ui-icon-pencil"
@@ -124,7 +124,7 @@
                     <p:tab title="Equipe">
                         <p:dataTable value="#{beanProjeto.projeto.funcionarios}"
                                      var="fu"
-                                     emptyMessage="Nenhum funcionárion encontrado!"
+                                     emptyMessage="Nenhum funcionario encontrado!"
                                      id="tbFuncionarios">
                             <p:column headerText="Nome">
                                 <h:outputText value="#{fu.nome}"/>
@@ -134,8 +134,8 @@
                             </p:column>
                             <p:column>
                                 <p:commandButton icon="ui-icon-close"
-                                                 title="Excluir" update="tbFuncionarios"
-                                                 actionListener="#{beanFuncionario.remover(fu)}">
+                                                 title="Remover" update="tbFuncionarios"
+                                                 actionListener="#{beanProjeto.remover(fu)}">
                                     <p:confirm header="Confirmação"
                                                message=" Deseja realmente remover o funcionario?"
                                                icon="ui-icon-alert"/>
@@ -258,6 +258,16 @@
                                      ajax="false"
                                      immediate="true"/>
                 </p:outputPanel>
+                <h:form>
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Sim" type="button"
+                                         styleClass="ui-confirmdialog-yes"
+                                         icon="ui-icon-check"/>
+                        <p:commandButton value="Não" type="button"
+                                         styleClass="ui-confirmdialog-no"
+                                         icon="ui-icon-close"/>
+                    </p:confirmDialog>
+                </h:form>
             </h:form>
         </p:panel>
     </ui:define>

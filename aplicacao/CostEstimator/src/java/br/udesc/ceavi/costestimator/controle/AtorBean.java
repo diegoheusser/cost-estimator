@@ -14,12 +14,11 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean(name = "beanAtor")
 @SessionScoped
-public class AtorBean extends Nivel {
+public class AtorBean {
 
     private final String telaCadastroAtor = "/sistema/projeto/ator/cadastro";
     private final String telaCadastroProjeto = "/sistema/projeto/cadastro";
     private Ator ator;
-    private Nivel nivel;
 
     public String alterar(Ator at) {
         this.ator = at;
@@ -90,12 +89,6 @@ public class AtorBean extends Nivel {
         this.ator = ator;
     }
 
-    public Nivel getNivel() {
-        return nivel;
-    }
 
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
-    }
 
 }
