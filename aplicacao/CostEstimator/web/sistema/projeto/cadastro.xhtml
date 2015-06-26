@@ -30,7 +30,8 @@
                         <p:panel header="Atores" toggleable="true">
                             <p:dataTable value="#{beanProjeto.projeto.atores}"
                                          var="at"
-                                         emptyMessage="Nenhum ator encontrado!">
+                                         emptyMessage="Nenhum ator encontrado!"
+                                         id="tbAtores">
                                 <p:column headerText="Descrição">
                                     <h:outputText value="#{at.descricao}"/>
                                 </p:column>
@@ -42,6 +43,13 @@
                                                      ajax="false"
                                                      immediate="true"
                                                      action="#{beanAtor.alterar(at)}"/>
+                                    <p:commandButton icon="ui-icon-close"
+                                                     title="Excluir" update="tbAtores"
+                                                     actionListener="#{beanAtor.excluir(at)}">
+                                        <p:confirm header="Confirmação"
+                                                   message=" Deseja realmente excluir o ator?"
+                                                   icon="ui-icon-alert"/>
+                                    </p:commandButton>
                                 </p:column>
                             </p:dataTable>
                             <p:commandButton value="Novo"
@@ -53,7 +61,8 @@
                         <p:panel header="Caso de Usos" toggleable="true">
                             <p:dataTable value="#{beanProjeto.projeto.casoDeUsos}"
                                          var="uc"
-                                         emptyMessage="Nenhum caso de uso encontrado!">
+                                         emptyMessage="Nenhum caso de uso encontrado!"
+                                         id="tbCasosDeUsos">
                                 <p:column headerText="Descrição">
                                     <h:outputText value="#{uc.descricao}"/>
                                 </p:column>
@@ -65,6 +74,13 @@
                                                      ajax="false"
                                                      immediate="true"
                                                      action="#{beanCasoDeUso.alterar(uc)}"/>
+                                    <p:commandButton icon="ui-icon-close"
+                                                     title="Excluir" update="tbCasosDeUsos"
+                                                     actionListener="#{beanCasoDeUso.excluir(uc)}">
+                                        <p:confirm header="Confirmação"
+                                                   message=" Deseja realmente excluir o caso de uso?"
+                                                   icon="ui-icon-alert"/>
+                                    </p:commandButton>
                                 </p:column>
                             </p:dataTable>
                             <p:commandButton value="Novo"
@@ -77,7 +93,8 @@
                         <p:panel header="Custos" toggleable="true">
                             <p:dataTable value="#{beanProjeto.projeto.custos}"
                                          var="ct"
-                                         emptyMessage="Nenhum custo encontrado!">
+                                         emptyMessage="Nenhum custo encontrado!"
+                                         id="tbCustos">
                                 <p:column headerText="Descrição">
                                     <h:outputText value="#{ct.descricao}"/>
                                 </p:column>
@@ -89,6 +106,13 @@
                                                      ajax="false"
                                                      immediate="true"
                                                      action="#{beanCusto.alterar(ct)}"/>
+                                    <p:commandButton icon="ui-icon-close"
+                                                     title="Excluir" update="tbCustos"
+                                                     actionListener="#{beanCusto.excluir(ct)}">
+                                        <p:confirm header="Confirmação"
+                                                   message=" Deseja realmente excluir o custo?"
+                                                   icon="ui-icon-alert"/>
+                                    </p:commandButton>
                                 </p:column>
                             </p:dataTable>
                             <p:commandButton value="Novo"
@@ -97,7 +121,133 @@
                                              immediate="true"/>
                         </p:panel>
                     </p:tab>
-                    <p:tab title="Equipe"></p:tab>
+                    <p:tab title="Equipe">
+                        <p:dataTable value="#{beanProjeto.projeto.funcionarios}"
+                                     var="fu"
+                                     emptyMessage="Nenhum funcionárion encontrado!"
+                                     id="tbFuncionarios">
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{fu.nome}"/>
+                            </p:column>
+                            <p:column headerText="Valor">
+                                <h:outputText value="R$ #{fu.valorHora}"/>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton icon="ui-icon-close"
+                                                 title="Excluir" update="tbFuncionarios"
+                                                 actionListener="#{beanFuncionario.remover(fu)}">
+                                    <p:confirm header="Confirmação"
+                                               message=" Deseja realmente remover o funcionario?"
+                                               icon="ui-icon-alert"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <p:commandButton value="Adicionar"
+                                         action="#{beanFuncionario.addFuncionario()}"
+                                         ajax="false"
+                                         immediate="true"/>
+                    </p:tab>
+                    <p:tab title="Fatores Técnicos">
+                        <h:panelGrid columns="3">
+                            <h:outputText value="Fator"/>
+                            <h:outputText value="Requisito"/>
+                            <h:outputText value="Peso"/>
+
+                            <h:outputText value="T1"/>
+                            <h:outputText value="Sistema distribuído"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t1}"/>
+
+                            <h:outputText value="T2"/>
+                            <h:outputText value="Tempo de resposta"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t2}"/>
+
+                            <h:outputText value="T3"/>
+                            <h:outputText value="Eficiência"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t3}"/>
+
+                            <h:outputText value="T4"/>
+                            <h:outputText value="Processamento complexo"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t4}"/>
+
+                            <h:outputText value="T5"/>
+                            <h:outputText value="Código reutilizável"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t5}"/>
+
+                            <h:outputText value="T6"/>
+                            <h:outputText value="Facilidade de instalação"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t6}"/>
+
+                            <h:outputText value="T7"/>
+                            <h:outputText value="Facilidade de uso"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t7}"/>
+
+                            <h:outputText value="T8"/>
+                            <h:outputText value="Portabilidade"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t8}"/>
+
+                            <h:outputText value="T9"/>
+                            <h:outputText value="Facilidade de mudança"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t9}"/>
+
+                            <h:outputText value="T10"/>
+                            <h:outputText value="Concorrência"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t10}"/>
+
+                            <h:outputText value="T11"/>
+                            <h:outputText value="Recursos de segurança"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t11}"/>
+
+                            <h:outputText value="T12"/>
+                            <h:outputText value="Acessível por terceiros"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t12}"/>
+
+                            <h:outputText value="T13"/>
+                            <h:outputText value="Requer treinamento especial"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresTecnicos.t13}"/>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Fatores Ambientais">
+                        <h:panelGrid columns="3">
+
+                            <h:outputText value="Fator"/>
+                            <h:outputText value="Requisito"/>
+                            <h:outputText value="Peso"/>
+
+                            <h:outputText value="E1"/>
+                            <h:outputText value="Familiaridade com a metodologia Orientada a Objetos"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e1}"/>
+
+                            <h:outputText value="E2"/>
+                            <h:outputText value="Desenvolvedores em meio espediente"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e2}"/>
+
+                            <h:outputText value="E3"/>
+                            <h:outputText value="Experiência de um analista experiente"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e3}"/>
+
+                            <h:outputText value="E4"/>
+                            <h:outputText value="Experiência com a aplicação em desenvolvimento"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e4}"/>
+
+                            <h:outputText value="E5"/>
+                            <h:outputText value="Experiência em Orientação a Objetos"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e5}"/>
+
+                            <h:outputText value="E6"/>
+                            <h:outputText value="Motivação"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e6}"/>
+
+                            <h:outputText value="E7"/>
+                            <h:outputText value="Dificuldade de programação"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e7}"/>
+
+                            <h:outputText value="E8"/>
+                            <h:outputText value="Requisitos estáveis"/>
+                            <p:inputText value="#{beanProjeto.projeto.fatoresAmbientais.e8}"/>
+
+                        </h:panelGrid>
+                    </p:tab>
                 </p:tabView>
                 <p:outputPanel layout="block" style="text-align: center">
                     <p:commandButton value="Salvar"

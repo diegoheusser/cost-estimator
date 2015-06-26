@@ -71,6 +71,7 @@ public class Projeto implements Serializable {
     @OneToMany(mappedBy = "projeto")
     private List<Custo> custos;
 
+
     public void salvar() {
         ProjetoDAO dao = DAOFactory.getDAOFactory().getProjetoDAO();
         dao.salvar(this);
@@ -101,6 +102,8 @@ public class Projeto implements Serializable {
         this.atores = new ArrayList<>();
         this.casoDeUsos = new ArrayList<>();
         this.custos = new ArrayList<>();
+        fatoresAmbientais = new FatoresAmbiente();
+        fatoresTecnicos = new FatoresTecnicos();
     }
 
     public int getId() {

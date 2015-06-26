@@ -17,20 +17,66 @@ public class FuncionarioBean {
 
     private final String telaCadastro = "/sistema/funcionario/cadastro";
     private final String telaConsulta = "/sistema/funcionario/consulta";
+    private final String telaFuncionarios = "/sistema/funcionario/funcionarios";
 
     private Funcionario funcionario;
     private List<Funcionario> funcionarios;
 
     public FuncionarioBean() {
         this.funcionario = new Funcionario();
-        this.funcionarios = Funcionario.listar();
+        atualizaFuncionarios();
     }
 
-    public String alterar(Funcionario fu){
+    private void atualizaFuncionarios() {
+        this.funcionarios = Funcionario.listar();
+    }
+    
+        public void remover(Funcionario f) {
+        try {
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
+    public void excluir(Funcionario f) {
+        try {
+            Funcionario.remover(f.getId());
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+            atualizaFuncionarios();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
+    public String addFuncionario() {
+        return telaFuncionarios;
+    }
+
+    public String alterar(Funcionario fu) {
         this.funcionario = fu;
         return telaCadastro;
     }
-    
+
     public String novo() {
         this.funcionario = new Funcionario();
         return telaCadastro;
@@ -59,7 +105,7 @@ public class FuncionarioBean {
 
     public String cancelar() {
         this.funcionario = new Funcionario();
-        return "/sistema/funcionario/consuta";
+        return telaConsulta;
     }
 
     public Funcionario getFuncionario() {

@@ -31,6 +31,13 @@
                         <p:commandButton icon="ui-icon-pencil"
                                          ajax="false"
                                          action="#{beanUsuario.alterar(usu)}"/>
+                        <p:commandButton icon="ui-icon-close"
+                                         title="Excluir" update=":listagem"
+                                         actionListener="#{beanUsuario.excluir(usu)}">
+                            <p:confirm header="Confirmação"
+                                       message=" Deseja realmente excluir o usuario?"
+                                       icon="ui-icon-alert"/>
+                        </p:commandButton>
                     </h:form>
                 </p:column>
 
@@ -40,6 +47,16 @@
                 <p:commandButton value="Novo Usuário" 
                                  action="#{beanUsuario.novo()}"
                                  ajax="false"/>
+            </h:form>
+            <h:form>
+                <p:confirmDialog global="true">
+                    <p:commandButton value="Sim" type="button"
+                                     styleClass="ui-confirmdialog-yes"
+                                     icon="ui-icon-check"/>
+                    <p:commandButton value="Não" type="button"
+                                     styleClass="ui-confirmdialog-no"
+                                     icon="ui-icon-close"/>
+                </p:confirmDialog>
             </h:form>
         </p:panel>
     </ui:define>

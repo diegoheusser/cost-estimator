@@ -1,6 +1,7 @@
 package br.udesc.ceavi.costestimator.controle;
 
 import br.udesc.ceavi.costestimator.modelo.Ator;
+import br.udesc.ceavi.costestimator.modelo.Projeto;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,9 +26,40 @@ public class AtorBean extends Nivel {
         return telaCadastroAtor;
     }
 
+    public void excluir(Ator a) {
+        try {
+            if (a.getProjeto().getId() != 0) {
+                Ator.remover(a.getId());
+            } else {
+                HttpSession session
+                        = (HttpSession) FacesContext.getCurrentInstance()
+                        .getExternalContext().getSession(false);
+                ProjetoBean beanProjeto = (ProjetoBean) session.getAttribute("beanProjeto");
+                beanProjeto.getProjeto().getAtores().remove(a);
+            }
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
     public String salvar() {
         try {
-            ator.salvar();
+            HttpSession session
+                    = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            ProjetoBean beanProjeto = (ProjetoBean) session.getAttribute("beanProjeto");
+            ator.setProjeto(beanProjeto.getProjeto());
+            beanProjeto.getProjeto().getAtores().add(ator);
         } catch (Exception ex) {
             FacesContext.getCurrentInstance()
                     .addMessage(null, new FacesMessage(

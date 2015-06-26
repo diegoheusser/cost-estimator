@@ -1,6 +1,7 @@
 package br.udesc.ceavi.costestimator.controle;
 
 import br.udesc.ceavi.costestimator.modelo.Projeto;
+import br.udesc.ceavi.costestimator.modelo.Usuario;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,20 +19,53 @@ public class ProjetoBean {
 
     private final String telaCadastro = "/sistema/projeto/cadastro";
     private final String telaConsulta = "/sistema/projeto/consulta";
+    private final String telaApontamentos = "/sistema/projeto/apontamentos";
+    private final String telaUCP = "/sistema/projeto/ucp";
 
     private Projeto projeto;
     private List<Projeto> projetos;
 
     public ProjetoBean() {
+        this.projeto = new Projeto();
+        atualizaProjetos();
+    }
+    
+    public String apontar(Projeto pr){
+        return telaApontamentos;
+    }
+    
+    public String calcular(Projeto pr) {
+        return telaUCP;
+    }
+
+    private void atualizaProjetos() {
         HttpSession session
                 = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
         LoginBean beanLogin = (LoginBean) session.getAttribute("beanLogin");
-        this.projeto = new Projeto();
         this.projetos = Projeto.listar(beanLogin.getUsuario().getId());
     }
-    
-    public String alterar(Projeto pr){
+
+    public void excluir(Projeto p) {
+        try {
+            Projeto.remover(p.getId());
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+            atualizaProjetos();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
+    public String alterar(Projeto pr) {
         this.projeto = pr;
         return telaCadastro;
     }
@@ -69,7 +103,7 @@ public class ProjetoBean {
 
     public String cancelar() {
         this.projeto = new Projeto();
-        return "/sistema/projeto/consuta";
+        return telaConsulta;
     }
 
     public Projeto getProjeto() {

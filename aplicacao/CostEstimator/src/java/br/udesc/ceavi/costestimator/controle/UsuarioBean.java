@@ -33,6 +33,25 @@ public class UsuarioBean {
         this.atualizaUsuarios();
     }
 
+    public void excluir(Usuario u) {
+        try {
+            Usuario.remover(u.getId());
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+            atualizaUsuarios();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
     public void atualizaUsuarios() {
         this.usuarios = Usuario.listar();
     }

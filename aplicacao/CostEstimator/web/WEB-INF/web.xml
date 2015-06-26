@@ -21,7 +21,7 @@
     <welcome-file-list>
         <welcome-file>login.jsf</welcome-file>
     </welcome-file-list>
-        <filter>
+    <filter>
         <filter-name>FiltroAcessoSistema</filter-name>
         <filter-class>br.udesc.ceavi.costestimator.web.filtro.FiltroAcessoSistema</filter-class>
     </filter>
@@ -33,7 +33,7 @@
         <filter-name>FiltroAcessoSistema</filter-name>
         <url-pattern>/sistema/*</url-pattern>
     </filter-mapping>
-        <filter-mapping>
+    <filter-mapping>
         <filter-name>FiltroAdministrador</filter-name>
         <url-pattern>/sistema/usuario/*</url-pattern>
     </filter-mapping>
