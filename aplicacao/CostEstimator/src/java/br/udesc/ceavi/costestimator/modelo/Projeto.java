@@ -44,7 +44,7 @@ public class Projeto implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataTermino;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany
     @JoinTable(
             name = "projeto_funcionario",
             joinColumns = {
@@ -53,25 +53,33 @@ public class Projeto implements Serializable {
                 @JoinColumn(name = "funcionario_id")})
     private List<Funcionario> funcionarios;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "projeto", 
+            orphanRemoval = true, 
+            cascade = CascadeType.ALL)
     private List<Ator> atores;
 
-    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "projeto", 
+            orphanRemoval = true, 
+            cascade = CascadeType.ALL)
     private List<CasoDeUso> casoDeUsos;
 
-    @OneToOne( cascade = CascadeType.ALL)
+    @OneToOne( orphanRemoval = true, 
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "fatores_ambientais_id")
     private FatoresAmbiente fatoresAmbientais;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne( orphanRemoval = true, 
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "fatores_tecnicos_id")
     private FatoresTecnicos fatoresTecnicos;
 
-    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "projeto", 
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private List<Custo> custos;
     
     @Column(name = "custo_estimado")
