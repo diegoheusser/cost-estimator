@@ -41,7 +41,9 @@ public class CasoDeUso implements Serializable {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
     
-    @OneToMany( mappedBy = "casoDeUso",cascade = CascadeType.ALL)
+    @OneToMany( mappedBy = "casoDeUso",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private List<Apontamento> apontamentos;
 
     public static void remover(int id) {
@@ -96,13 +98,13 @@ public class CasoDeUso implements Serializable {
     
     public String getComp(){
         switch(complexidade){
-            case 1: {
+            case 5: {
                 return "Simples";
             }
-            case 2: {
+            case 10: {
                 return "Médio";
             }
-            case 3: {
+            case 15: {
                 return "Complexo";
             }
             default: {

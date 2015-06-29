@@ -24,32 +24,6 @@ public class CustoBean {
         return telaCadastroCusto;
     }
     
-        public void excluir(Custo c) {
-        try {
-            if (c.getProjeto().getId() != 0) {
-                Custo.remover(c.getId());
-            } else {
-                HttpSession session
-                        = (HttpSession) FacesContext.getCurrentInstance()
-                        .getExternalContext().getSession(false);
-                ProjetoBean beanProjeto = (ProjetoBean) session.getAttribute("beanProjeto");
-                beanProjeto.getProjeto().getCustos().remove(c);
-            }
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_INFO, "Removido", ""
-                    )
-            );
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
-                    )
-            );
-        }
-    }
-
     public String salvar() {
         try {
             HttpSession session

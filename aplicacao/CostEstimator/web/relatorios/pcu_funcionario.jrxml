@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pcu_funcionario" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9981a31d-dc87-47e6-a110-a048c4436a52">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PROJETO_ID" class="java.lang.Integer"/>
+	<parameter name="TEMPO_ESTIMADO" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT
+f.*
+FROM
+funcionario AS f
+JOIN
+projeto_funcionario AS pf ON f.funcionario_id = pf.funcionario_id
+WHERE
+pf.projeto_id = $P{PROJETO_ID}]]>
+	</queryString>
+	<field name="funcionario_id" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="valor_hora" class="java.lang.Double"/>
+	<variable name="CUSTO_FUNCIONARIO" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{valor_hora} * $V{TEMPO_POR_FUNCIONARIO}]]></variableExpression>
+	</variable>
+	<variable name="QUANTIDADE_FUNCIONARIOS" class="java.lang.Double" calculation="Count">
+		<variableExpression><![CDATA[$F{funcionario_id}]]></variableExpression>
+	</variable>
+	<variable name="TEMPO_POR_FUNCIONARIO" class="java.lang.Double">
+		<variableExpression><![CDATA[$P{TEMPO_ESTIMADO} / $V{QUANTIDADE_FUNCIONARIOS}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_CUSTO_FUNCIONARIO" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_hora} *($P{TEMPO_ESTIMADO}/$V{QUANTIDADE_FUNCIONARIOS})]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="94d573b7-f386-4741-a8ac-7bb52ab027a3" x="0" y="0" width="258" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[FUNCIONÁRIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="94d573b7-f386-4741-a8ac-7bb52ab027a3" x="375" y="0" width="180" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[CUSTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="94d573b7-f386-4741-a8ac-7bb52ab027a3" x="258" y="0" width="117" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[VALOR/HORA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f7cb7a2f-c898-4157-befd-2c2c24c0c0c8" x="0" y="0" width="258" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" "+ $F{nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="f7cb7a2f-c898-4157-befd-2c2c24c0c0c8" x="375" y="0" width="180" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valor_hora} *($P{TEMPO_ESTIMADO}/$V{QUANTIDADE_FUNCIONARIOS})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7cb7a2f-c898-4157-befd-2c2c24c0c0c8" x="258" y="0" width="117" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valor_hora}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="94d573b7-f386-4741-a8ac-7bb52ab027a3" x="315" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement uuid="f7cb7a2f-c898-4157-befd-2c2c24c0c0c8" x="375" y="0" width="180" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_CUSTO_FUNCIONARIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

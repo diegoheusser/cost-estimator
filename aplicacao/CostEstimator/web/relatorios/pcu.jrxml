@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pcu" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c3ef948-d29e-42a9-88e9-a3bacfd2b7a9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="76"/>
+	<parameter name="PROJETO_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/diego/github/cost-estimator/aplicacao/CostEstimator/web/relatorios/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+*
+FROM
+projeto
+WHERE
+projeto_id = $P{PROJETO_ID}]]>
+	</queryString>
+	<field name="projeto_id" class="java.lang.Integer"/>
+	<field name="custo_estimado" class="java.lang.Double"/>
+	<field name="custo_real" class="java.lang.Double"/>
+	<field name="data_inicio" class="java.sql.Date"/>
+	<field name="data_termino" class="java.sql.Date"/>
+	<field name="data_termino_estimada" class="java.sql.Date"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="horas_pessoas_ucp" class="java.lang.Double"/>
+	<field name="usuario_id" class="java.lang.Integer"/>
+	<field name="fatores_ambientais_id" class="java.lang.Integer"/>
+	<field name="fatores_tecnicos_id" class="java.lang.Integer"/>
+	<variable name="UAW" class="java.lang.Integer"/>
+	<variable name="UUCW" class="java.lang.Integer"/>
+	<variable name="TCF" class="java.lang.Double"/>
+	<variable name="ECF" class="java.lang.Double"/>
+	<variable name="UUCP" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{UAW} + $V{UUCW}]]></variableExpression>
+	</variable>
+	<variable name="UCP" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{UUCP} * $V{TCF} * $V{ECF}]]></variableExpression>
+	</variable>
+	<variable name="CUSTO_TOTAL" class="java.lang.Double"/>
+	<variable name="TEMPO_ESTIMADO" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{UCP} * $F{horas_pessoas_ucp} ]]></variableExpression>
+	</variable>
+	<variable name="CUSTO_ESTIMADO" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{TOTAL_CUSTO_FUNCIONARIO} + $V{CUSTO_TOTAL}]]></variableExpression>
+	</variable>
+	<variable name="DATA_ESTIMA_TERMINO" class="java.lang.String"/>
+	<variable name="TOTAL_CUSTO_FUNCIONARIO" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="19ec98c7-ff2e-483d-b3b7-aedaadfbf1dc" x="0" y="0" width="555" height="79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Relatório da Análise dos Pontos por Caso de Uso]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="f9e97e0d-788a-4b61-b2fe-7f2b3865e3c7" x="0" y="20" width="555" height="20"/>
+				<subreportParameter name="PROJETO_ID">
+					<subreportParameterExpression><![CDATA[$F{projeto_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="UAW" toVariable="UAW"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pcu_atores.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<subreport>
+				<reportElement uuid="919e9b9e-4b57-4516-b45f-ca54a302577f" x="0" y="20" width="555" height="20"/>
+				<subreportParameter name="PROJETO_ID">
+					<subreportParameterExpression><![CDATA[$F{projeto_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="UUCW" toVariable="UUCW"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pcu_caso_uso.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<subreport>
+				<reportElement uuid="d40997a0-cea6-4291-8841-c5c6d6970de2" x="0" y="20" width="555" height="20"/>
+				<subreportParameter name="FATORES_TECNICOS_ID">
+					<subreportParameterExpression><![CDATA[$F{fatores_tecnicos_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="TCF" toVariable="TCF"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pcu_fatores_tecnicos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<subreport>
+				<reportElement uuid="0cf2339f-c88a-4460-81ab-b5871ad0c1cd" x="0" y="20" width="555" height="20"/>
+				<subreportParameter name="FATORES_AMBIENTE_ID">
+					<subreportParameterExpression><![CDATA[$F{fatores_ambientais_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="ECF" toVariable="ECF"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pcu_fatores_ambiente.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<subreport>
+				<reportElement uuid="0b3a819c-3393-4473-a684-034479dfd9e3" x="0" y="20" width="555" height="20"/>
+				<subreportParameter name="PROJETO_ID">
+					<subreportParameterExpression><![CDATA[$F{projeto_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="CUSTO_TOTAL" toVariable="CUSTO_TOTAL"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pcu_custo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<subreport>
+				<reportElement uuid="a748b5d8-47e6-4112-bbdb-753fe765dcbe" x="0" y="20" width="555" height="20"/>
+				<subreportParameter name="TEMPO_ESTIMADO">
+					<subreportParameterExpression><![CDATA[(($V{UAW} + $V{UUCW}) * $V{TCF} * $V{ECF})*$F{horas_pessoas_ucp}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PROJETO_ID">
+					<subreportParameterExpression><![CDATA[$F{projeto_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="TOTAL_CUSTO_FUNCIONARIO" toVariable="TOTAL_CUSTO_FUNCIONARIO"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pcu_funcionario.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5230144b-6923-4bb4-aad7-d10c20515642" x="508" y="0" width="47" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="3c0aeeb3-4309-48ae-8b2e-26e90c344bac" x="63" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="980cb2db-b428-42fc-be92-9c5b50f9c4cb" x="408" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bbc0ccb6-6ae4-4fcf-8243-327bcba23aed" x="0" y="0" width="62" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Emitido em:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="194" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="20" width="301" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[ Pontos por Caso de Uso não ajustado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="45" width="301" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[ Pontos por Caso de Uso  ajustado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="70" width="301" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[ Tempo estimado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="143" width="284" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Data estimada para termino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="168" width="284" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Custo estimado]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5a2c33da-1680-4ed1-8d3c-bd10ec211008" x="301" y="20" width="107" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{UAW} + $V{UUCW}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="5ed270f5-960c-4e1e-a79d-7c576b8627bb" x="301" y="45" width="107" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{UAW} + $V{UUCW}) * $V{TCF} * $V{ECF}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="d93a38c1-3375-4a98-ba8a-37e573238414" x="301" y="70" width="107" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($V{UAW} + $V{UUCW}) * $V{TCF} * $V{ECF})*$F{horas_pessoas_ucp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="bdea64fc-02db-4e87-a7c9-6c9804fcf8c4" x="284" y="168" width="107" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{CUSTO_TOTAL} + $V{TOTAL_CUSTO_FUNCIONARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b3d52b46-715b-47ee-ba5f-dd8b129e639c" x="284" y="143" width="107" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{DATA_ESTIMA_TERMINO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

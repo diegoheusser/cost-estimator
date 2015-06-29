@@ -25,32 +25,6 @@ public class CasoDeUsoBean {
         return telaCadastroCasoDeUso;
     }
 
-        public void excluir(CasoDeUso c) {
-        try {
-            if (c.getProjeto().getId() != 0) {
-                CasoDeUso.remover(c.getId());
-            } else {
-                HttpSession session
-                        = (HttpSession) FacesContext.getCurrentInstance()
-                        .getExternalContext().getSession(false);
-                ProjetoBean beanProjeto = (ProjetoBean) session.getAttribute("beanProjeto");
-                beanProjeto.getProjeto().getCasoDeUsos().remove(c);
-            }
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_INFO, "Removido", ""
-                    )
-            );
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
-                    )
-            );
-        }
-    }
-    
     public String salvar() {
         try {
             HttpSession session

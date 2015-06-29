@@ -1,5 +1,7 @@
 package br.udesc.ceavi.costestimator.controle;
 
+import br.udesc.ceavi.costestimator.modelo.Ator;
+import br.udesc.ceavi.costestimator.modelo.CasoDeUso;
 import br.udesc.ceavi.costestimator.modelo.Custo;
 import br.udesc.ceavi.costestimator.modelo.Funcionario;
 import br.udesc.ceavi.costestimator.modelo.Projeto;
@@ -38,10 +40,10 @@ public class ProjetoBean {
     public String calcular(Projeto pr) {
         return telaUCP;
     }
-    
-    public void adicionar(List<Funcionario> funcionarios){
-        for(Funcionario f : funcionarios){
-            if(!projeto.getFuncionarios().contains(f)){
+
+    public void adicionar(List<Funcionario> funcionarios) {
+        for (Funcionario f : funcionarios) {
+            if (!projeto.getFuncionarios().contains(f)) {
                 projeto.getFuncionarios().add(f);
             }
         }
@@ -64,6 +66,60 @@ public class ProjetoBean {
                     )
             );
             atualizaProjetos();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
+    public void removerAtor(Ator a) {
+        try {
+            projeto.getAtores().remove(a);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
+    public void removerCasoDeUso(CasoDeUso c) {
+        try {
+            projeto.getCasoDeUsos().remove(c);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
+                    )
+            );
+        }
+    }
+
+    public void removerCusto(Custo c) {
+        try {
+            projeto.getCustos().remove(c);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO, "Removido", ""
+                    )
+            );
         } catch (Exception ex) {
             ex.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(

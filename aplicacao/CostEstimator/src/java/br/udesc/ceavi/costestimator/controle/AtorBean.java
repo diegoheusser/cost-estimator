@@ -25,32 +25,6 @@ public class AtorBean {
         return telaCadastroAtor;
     }
 
-    public void excluir(Ator a) {
-        try {
-            if (a.getProjeto().getId() != 0) {
-                Ator.remover(a.getId());
-            } else {
-                HttpSession session
-                        = (HttpSession) FacesContext.getCurrentInstance()
-                        .getExternalContext().getSession(false);
-                ProjetoBean beanProjeto = (ProjetoBean) session.getAttribute("beanProjeto");
-                beanProjeto.getProjeto().getAtores().remove(a);
-            }
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_INFO, "Removido", ""
-                    )
-            );
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_ERROR, "Erro: ", ex.getMessage()
-                    )
-            );
-        }
-    }
-
     public String salvar() {
         try {
             HttpSession session

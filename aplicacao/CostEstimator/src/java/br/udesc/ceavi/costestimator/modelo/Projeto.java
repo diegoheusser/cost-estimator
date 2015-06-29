@@ -87,6 +87,13 @@ public class Projeto implements Serializable {
     
     @Column(name = "custo_real")
     private double custoReal;
+    
+    @Column(name = "data_termino_estimada")
+    @Temporal(TemporalType.DATE)
+    private Date dataTerminoEstimada;
+    
+    @Column(name = "horas_pessoas_ucp")
+    private double horasPessoasUCP;
 
 
     public void salvar() {
@@ -121,6 +128,7 @@ public class Projeto implements Serializable {
         this.custos = new ArrayList<>();
         fatoresAmbientais = new FatoresAmbiente();
         fatoresTecnicos = new FatoresTecnicos();
+        this.horasPessoasUCP = 20;
     }
 
     public int getId() {
@@ -227,4 +235,20 @@ public class Projeto implements Serializable {
         this.custoReal = custoReal;
     }
 
+    public Date getDataTerminoEstimada() {
+        return dataTerminoEstimada;
+    }
+
+    public void setDataTerminoEstimada(Date dataTerminoEstimada) {
+        this.dataTerminoEstimada = dataTerminoEstimada;
+    }
+
+    public double getHorasPessoasUCP() {
+        return horasPessoasUCP;
+    }
+
+    public void setHorasPessoasUCP(double horasPessoasUCP) {
+        this.horasPessoasUCP = horasPessoasUCP;
+    }
+    
 }
