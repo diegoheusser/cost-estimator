@@ -55,7 +55,7 @@ public class ProjetoBean {
 
     public ProjetoBean() {
         this.projeto = new Projeto();
-        System.loadLibrary("opencv_java241");
+//        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         atualizaProjetos();
     }
 
@@ -65,7 +65,9 @@ public class ProjetoBean {
 
     public void relatorioUCP() {
         HashMap<String, Object> parametros = new HashMap<>();
+        String subreport = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/relatorios/");
         parametros.put("PROJETO_ID", this.projeto.getId());
+        parametros.put("SUBREPORT_DIR", subreport);
         try {
             relatorio("ucp", parametros);
         } catch (JRException ex) {
@@ -88,7 +90,7 @@ public class ProjetoBean {
         JasperReport jasper = JasperCompileManager.compileReport(fis);
 
         Context cxt = new InitialContext();
-        DataSource dataSource = (DataSource) cxt.lookup("java:/comp/env/jdbc/controle_estoque");
+        DataSource dataSource = (DataSource) cxt.lookup("java:/comp/env/jdbc/cost-estimator");
 
         JasperPrint printer = JasperFillManager.fillReport(jasper, parametros, dataSource.getConnection());
 
@@ -216,16 +218,16 @@ public class ProjetoBean {
         entrada[24] = e6;
         entrada[25] = e7;
         entrada[26] = e8;
-        IRedeNeural redeNeural = RedeNeuralOpenCv.getInstancia();
-        redeNeural.treinamento();
-        double[] saida = redeNeural.predicao(entrada);
-        int maior = 0;
-        for (int i = 0; i < saida.length; i++) {
-            if (saida[i] > saida[maior]) {
-                maior = i;
-            }
-        }
-        pr.setComplexidade(maior + 1);
+//        IRedeNeural redeNeural = RedeNeuralOpenCv.getInstancia();
+//        redeNeural.treinamento();
+//        double[] saida = redeNeural.predicao(entrada);
+//        int maior = 0;
+//        for (int i = 0; i < saida.length; i++) {
+//            if (saida[i] > saida[maior]) {
+//                maior = i;
+//            }
+//        }
+//        pr.setComplexidade(maior + 1);
         pr.setDataTerminoEstimada(dataEstimada);
         pr.setCustoEstimado(custoEstimado);
         this.projeto = pr;
