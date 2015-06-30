@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pcu" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c3ef948-d29e-42a9-88e9-a3bacfd2b7a9">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="76"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="PROJETO_ID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -40,7 +40,7 @@ projeto_id = $P{PROJETO_ID}]]>
 	</variable>
 	<variable name="CUSTO_TOTAL" class="java.lang.Double"/>
 	<variable name="TEMPO_ESTIMADO" class="java.lang.Double">
-		<variableExpression><![CDATA[$V{UCP} * $F{horas_pessoas_ucp} ]]></variableExpression>
+		<variableExpression><![CDATA[$V{UCP} * $F{horas_pessoas_ucp}]]></variableExpression>
 	</variable>
 	<variable name="CUSTO_ESTIMADO" class="java.lang.Double">
 		<variableExpression><![CDATA[$V{TOTAL_CUSTO_FUNCIONARIO} + $V{CUSTO_TOTAL}]]></variableExpression>
@@ -57,7 +57,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20"/>
 				</textElement>
-				<text><![CDATA[Relatório da Análise dos Pontos por Caso de Uso]]></text>
+				<text><![CDATA[Relatório de estimativa de custo]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -160,9 +160,9 @@ projeto_id = $P{PROJETO_ID}]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="194" splitType="Stretch">
+		<band height="300" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="20" width="301" height="25"/>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="127" width="301" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -176,7 +176,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<text><![CDATA[ Pontos por Caso de Uso não ajustado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="45" width="301" height="25"/>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="152" width="301" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -190,7 +190,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<text><![CDATA[ Pontos por Caso de Uso  ajustado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="70" width="301" height="25"/>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="177" width="301" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -204,7 +204,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<text><![CDATA[ Tempo estimado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="143" width="284" height="25"/>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="250" width="284" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -218,7 +218,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<text><![CDATA[Data estimada para termino]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="168" width="284" height="25"/>
+				<reportElement uuid="168aefae-4423-4e30-89bc-9d17b8491d7f" x="0" y="275" width="284" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -232,7 +232,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<text><![CDATA[Custo estimado]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="5a2c33da-1680-4ed1-8d3c-bd10ec211008" x="301" y="20" width="107" height="25"/>
+				<reportElement uuid="5a2c33da-1680-4ed1-8d3c-bd10ec211008" x="301" y="127" width="107" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -246,7 +246,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<textFieldExpression><![CDATA[$V{UAW} + $V{UUCW}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement uuid="5ed270f5-960c-4e1e-a79d-7c576b8627bb" x="301" y="45" width="107" height="25"/>
+				<reportElement uuid="5ed270f5-960c-4e1e-a79d-7c576b8627bb" x="301" y="152" width="107" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -260,7 +260,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<textFieldExpression><![CDATA[($V{UAW} + $V{UUCW}) * $V{TCF} * $V{ECF}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement uuid="d93a38c1-3375-4a98-ba8a-37e573238414" x="301" y="70" width="107" height="25"/>
+				<reportElement uuid="d93a38c1-3375-4a98-ba8a-37e573238414" x="301" y="177" width="107" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -274,7 +274,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<textFieldExpression><![CDATA[(($V{UAW} + $V{UUCW}) * $V{TCF} * $V{ECF})*$F{horas_pessoas_ucp}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement uuid="bdea64fc-02db-4e87-a7c9-6c9804fcf8c4" x="284" y="168" width="107" height="25"/>
+				<reportElement uuid="bdea64fc-02db-4e87-a7c9-6c9804fcf8c4" x="284" y="275" width="107" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -288,7 +288,7 @@ projeto_id = $P{PROJETO_ID}]]>
 				<textFieldExpression><![CDATA[$V{CUSTO_TOTAL} + $V{TOTAL_CUSTO_FUNCIONARIO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b3d52b46-715b-47ee-ba5f-dd8b129e639c" x="284" y="143" width="107" height="25"/>
+				<reportElement uuid="b3d52b46-715b-47ee-ba5f-dd8b129e639c" x="284" y="250" width="107" height="25"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -301,6 +301,9 @@ projeto_id = $P{PROJETO_ID}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{DATA_ESTIMA_TERMINO}]]></textFieldExpression>
 			</textField>
+			<break>
+				<reportElement uuid="b6ff162d-83dd-4487-ab03-3fc3047ce249" x="0" y="11" width="100" height="1"/>
+			</break>
 		</band>
 	</summary>
 </jasperReport>

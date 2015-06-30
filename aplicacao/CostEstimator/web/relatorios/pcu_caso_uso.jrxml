@@ -21,6 +21,15 @@ projeto_id = $P{PROJETO_ID}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
+	<title>
+		<band height="50">
+			<staticText>
+				<reportElement uuid="fe46536f-46a0-4879-8bfc-9c9a7629788b" x="0" y="0" width="555" height="50"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[UUCW é o Cálculo Inicial do peso Bruto dos Casos de Usos]]></text>
+			</staticText>
+		</band>
+	</title>
 	<columnHeader>
 		<band height="25" splitType="Stretch">
 			<staticText>

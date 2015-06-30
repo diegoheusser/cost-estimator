@@ -66,6 +66,15 @@ $V{VALOR_8}))]]></variableExpression>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
+	<title>
+		<band height="50">
+			<staticText>
+				<reportElement uuid="52818456-e871-4acf-bcb3-e40039ab828c" x="0" y="0" width="555" height="50"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[O ECF é o Fator de Complexidade Ambiental. Verifica as características da equipe e do ambiente em que será desenvolvido o projeto.]]></text>
+			</staticText>
+		</band>
+	</title>
 	<columnHeader>
 		<band height="25" splitType="Stretch">
 			<staticText>

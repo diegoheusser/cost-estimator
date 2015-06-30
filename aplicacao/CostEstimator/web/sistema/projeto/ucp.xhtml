@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
+    <ui:define name="conteudo">
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputText value="Data estimada de termino:"/>
+                <h:outputText value="#{beanProjeto.projeto.dataTerminoEstimada}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+                <h:outputText/>
+
+                <h:outputText value="Custo estimado:"/>
+                <h:outputText value="#{beanProjeto.projeto.custoEstimado}">
+                    <f:convertNumber pattern="#,##0.00"/>
+                </h:outputText>
+                <h:outputText />
+
+                <h:outputText value="Complexidade:"/>
+                <h:outputText value="#{beanProjeto.projeto.comp}"/>
+                <p:commandButton icon="ui-icon-pencil"/>
+
+
+            </h:panelGrid>
+            <p:outputPanel layout="block">
+                <p:commandButton value="Salvar"
+                                 action="#{beanProjeto.salvar()}"/>
+                <h:form target="_blank">
+                    <p:commandButton value="Imprimir"
+                                     action="#{beanProjeto.relatorioUCP()}"/>
+                </h:form>
+                <p:commandButton value="Cancelar"
+                                 action="#{beanProjeto.cancelar()}"/>
+            </p:outputPanel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

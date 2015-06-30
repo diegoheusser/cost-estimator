@@ -96,6 +96,18 @@ $V{VALOR_13}))]]></variableExpression>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
+	<title>
+		<band height="60">
+			<staticText>
+				<reportElement uuid="4a3450b0-785b-4f2b-98ab-2d2d03beed91" x="0" y="10" width="555" height="50"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[O TCF é o Fator de Complexidade Técnica.]]></text>
+			</staticText>
+			<break>
+				<reportElement uuid="cc6c3f8c-9fd7-401d-8647-dfe9a7bfe924" x="0" y="5" width="100" height="1"/>
+			</break>
+		</band>
+	</title>
 	<columnHeader>
 		<band height="25" splitType="Stretch">
 			<staticText>

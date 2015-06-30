@@ -104,6 +104,22 @@ public class FatoresTecnicos implements Serializable {
     @Column(name = "influencia_t13")
     private double influenciaT13;
 
+    public FatoresTecnicos(){
+        this.pesoT1 = 2;
+        this.pesoT2 = 1;
+        this.pesoT3 = 1;
+        this.pesoT4 = 1;
+        this.pesoT5 = 1;
+        this.pesoT6 = 0.5;
+        this.pesoT7 = 0.5;
+        this.pesoT8 = 2;
+        this.pesoT9 = 1;
+        this.pesoT10 = 1;
+        this.pesoT11 = 1;
+        this.pesoT12 = 1;
+        this.pesoT13 = 1;
+    }
+    
     public int getId() {
         return id;
     }

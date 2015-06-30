@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pcu_funcionario" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9981a31d-dc87-47e6-a110-a048c4436a52">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pcu_funcionario" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9981a31d-dc87-47e6-a110-a048c4436a52">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -33,6 +33,15 @@ pf.projeto_id = $P{PROJETO_ID}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
+	<title>
+		<band height="50">
+			<staticText>
+				<reportElement uuid="5219a3a2-2583-453b-ace3-6f17d124afb4" x="0" y="0" width="555" height="50"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Funcionários pertencentes a equipe deste projeto e seus respectivo valor por hora e o custo total do funcionario no projeto]]></text>
+			</staticText>
+		</band>
+	</title>
 	<columnHeader>
 		<band height="25" splitType="Stretch">
 			<staticText>

@@ -112,5 +112,21 @@ public class CasoDeUso implements Serializable {
             }
         }
     }
+    
+    public int porcentagem(){
+        int p = 0;
+        for(Apontamento a : apontamentos){
+            p += a.getPorcentagem();
+        }
+        return p;
+    }
+    
+    public double horasGastas(){
+        double h = 0;
+        for(Apontamento a :apontamentos){
+            h += a.getHoras();
+        }
+        return h;
+    }
 
 }

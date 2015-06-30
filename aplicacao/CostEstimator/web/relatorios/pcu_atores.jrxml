@@ -21,6 +21,15 @@ projeto_id = $P{PROJETO_ID}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
+	<title>
+		<band height="50">
+			<staticText>
+				<reportElement uuid="7ada76bc-f945-47fb-84bf-6306e917723f" x="0" y="0" width="555" height="50"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[UAW é o Peso Total dos Atores do Sistema. É calculado pela soma dos produtos do número de atores de cada tipo pelo respectivo peso.]]></text>
+			</staticText>
+		</band>
+	</title>
 	<columnHeader>
 		<band height="25">
 			<staticText>

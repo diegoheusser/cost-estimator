@@ -94,6 +94,9 @@ public class Projeto implements Serializable {
     
     @Column(name = "horas_pessoas_ucp")
     private double horasPessoasUCP;
+    
+    @Column(name = "complexidade")
+    private int complexidade;
 
 
     public void salvar() {
@@ -250,5 +253,29 @@ public class Projeto implements Serializable {
     public void setHorasPessoasUCP(double horasPessoasUCP) {
         this.horasPessoasUCP = horasPessoasUCP;
     }
+
+    public int getComplexidade() {
+        return complexidade;
+    }
+
+    public void setComplexidade(int complexidade) {
+        this.complexidade = complexidade;
+    }
     
+    public String comp(){
+        switch(complexidade){
+            case 1:{
+                return "Simples";
+            }
+            case 2:{
+                return "Médio";
+            }
+            case 3:{
+                return "Complexo";
+            }
+            default:{
+                return "";
+            }
+        }
+    }
 }

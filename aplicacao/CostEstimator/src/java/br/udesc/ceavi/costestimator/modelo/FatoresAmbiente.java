@@ -69,6 +69,17 @@ public class FatoresAmbiente implements Serializable {
     @Column(name = "influencia_e8")
     private double influenciaE8;
 
+    public FatoresAmbiente(){
+        this.pesoE1 = 1.5;
+        this.pesoE2 = -1;
+        this.pesoE3 = 0.5;
+        this.pesoE4 = 0.5;
+        this.pesoE5 = 1;
+        this.pesoE6 = 1;
+        this.pesoE7 = -1;
+        this.pesoE8 = 2;
+    }
+    
     public int getId() {
         return id;
     }
